@@ -7,7 +7,7 @@ new_gauges = {
 }
 
 for (pid, p) in pools.items():
-    new_gauges[p["gauge_ids"]["86400s"]] = int(p["renormalized_share"] * share_1 * gauge_precision)
-    new_gauges[p["gauge_ids"]["604800s"]] = int(p["renormalized_share"] * share_7 * gauge_precision)
-    new_gauges[p["gauge_ids"]["1209600s"]] = int(p["renormalized_share"] * share_14 * gauge_precision)
+    new_gauges[p["gauge_ids"]["86400s"]] = int(p["merged_with_maturity"] * share_1 * gauge_precision)
+    new_gauges[p["gauge_ids"]["604800s"]] = int(p["merged_with_maturity"] * share_7 * gauge_precision)
+    new_gauges[p["gauge_ids"]["1209600s"]] = int(p["merged_with_maturity"] * share_14 * gauge_precision)
 
