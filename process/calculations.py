@@ -48,6 +48,8 @@ print("avg subsidy:", avg_subsidy)
 
 for (pid,p) in pools.items():
     p["bias"] = "OSMO" in p["assets"] and 1+osmo_bias or 1-osmo_bias
+    if pid == 549:
+        p["bias"] = 0
     p["match_$_per_day"] = p["is_matched"] and min(p["external_$_per_day"] * match_limit_adjustment * min(1,p["bias"]), p["bias"]*avg_subsidy*p["weekly_fees_collected"]/7) or 0
 
     p["match_share"] = p["match_$_per_day"] / total_lp_incentives
