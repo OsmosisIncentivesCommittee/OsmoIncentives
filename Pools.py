@@ -25,17 +25,8 @@ class Pools:
             sum([p.fees_collected for p in self.pools.values()])
         )
 
-
     def avg_fee_apr(self):
         return (52 * self.total_fees()) / self.total_liquidity()
-
-    # def total_match(self):
-    #     return sum([p.match_per_day() for p in self.pools if p.is_matched()])
-    
-    # def match_limit_adjustment(self):
-    #     return min(1, total_lp_incentives * match_limit() / self.total_match())
-
-
 
     def avg_subsidy(self):
         return Query.load_total_lp_spend() / self.total_fees()
@@ -44,9 +35,6 @@ class Pools:
         return cached_call(self.cache, "match_share_renormalization_factor", lambda:  
             min(1, Params.match_limit / sum([p.unnorm_match_share() for p in self.pools.values()]))
         )
-
-    # def total_match_share(self):
-    #     return sum([p.match_share() for p in self.pools])
 
     def target_renormalization_factor(self):
         return cached_call(self.cache, "target_renormalization_factor", lambda:

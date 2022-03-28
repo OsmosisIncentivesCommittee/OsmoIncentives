@@ -26,34 +26,14 @@ class Pool:
         self.bias = "OSMO" in self.assets and 1+Params.osmo_bias or 1-Params.osmo_bias
 
         self.cache = {}
-    
-    # def fee_apr(self):
-    #     return 365*self.fees_collected()/self.liquidity
-
-    # def current_incentive_share(self):
-    #     return get_current_share(self.gauge_ids)
-
-    # def current_per_day(self):
-    #     return self.current_incentive_share() * total_lp_incentives
-
-    # def current_subsidy(self):
-    #     return self.current_per_day() / self.fees_collected()
-
-    # def osmo_apr(self):
-    #     return 365 * self.current_per_day() / self.liquidity()
-    
-
-    # def external_per_day(self):
-        
-    
-    # def external_apr(self):
-    #     return 365 * self.external_per_day() / self.liquidity()
-
-    # def is_matched(self):
-    #     return self.pid in matched_pool_ids
 
 
-    
+    #Compute the share of incentives needed to match external incentives on this pool
+    #This is only applies if the pool is being matched, and is equal to:
+    #   The $ per day of the external incentives applied to this pool,
+    #   scaled by capped bias (0.5 for non-osmo pools, 1 for osmo pools)
+    #   and capped at the target $ per day for the pool
+    # Dividied by the total $ per day of LP incentives
     def unnorm_match_share_(self):
         if self.pid in Params.matched_pool_ids:
             return min(
@@ -65,7 +45,7 @@ class Pool:
     def unnorm_match_share(self):
         return cached_call(self.cache, "unnorm_match_share", self.unnorm_match_share_)
 
-    
+    #We then renormalize the match share, so that it does not exceed the total match limit
     def match_share_(self):
         return self.pools.match_share_renormalization_factor() * self.unnorm_match_share()
     def match_share(self):
@@ -81,7 +61,6 @@ class Pool:
     
     #Compute the target share as the target subsidy multipled by the relative share of fees collected,
     #   capped at swap_fee_cap multiplied by the avg over all incentivized pools,
-    #   then renormalize so that the sum over all target shares is 99% (with 1% for community pool)
     def unnorm_target_share_(self):
         return self.target_subsidy() * min(
             self.fees_collected / Query.load_total_lp_spend(),
@@ -90,11 +69,14 @@ class Pool:
     def unnorm_target_share(self):
         return cached_call(self.cache, "unnorm_target_share", self.unnorm_target_share_)
 
+    #We then renormalize so that the sum over all target shares is 99% (with 1% for community pool)
     def target_share_(self):
         return self.unnorm_target_share() * self.pools.target_renormalization_factor()
     def target_share(self):
         return cached_call(self.cache, "target_share", self.target_share_)
 
+    #Compute the imbbalance as the ratio of the target share as compared to the current share
+    #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
     def imbalance_(self):
         cs = self.pools.get_current_share(self.gauge_ids)
         if cs > 0:
@@ -104,16 +86,23 @@ class Pool:
     def imbalance(self):
         return cached_call(self.cache, "imbalance", self.imbalance_)
 
+    #Compute the adjustment from the current share, to the target share
+    # limited to be no more than the current adjustment scale
+    # ie, bounding imbalance between 0.75 and 1.25
     def unnorm_scale_limited_target_(self):
         return self.pools.get_current_share(self.gauge_ids) * max(1 - Params.adjust_scale, min(1 + Params.adjust_scale, self.imbalance()))
     def unnorm_scale_limited_target(self):
         return cached_call(self.cache, "unnorm_scale_limited_target", self.unnorm_scale_limited_target_)
 
+    #Then renormalize again so that total scale limited target is 99% of incentives
     def scale_limited_target_(self):
         return self.unnorm_scale_limited_target() * self.pools.scale_limit_renormalization_factor()
     def scale_limited_target(self):
         return cached_call(self.cache, "scale_limited_target", self.scale_limited_target_)
     
+    #Compute the adjusted share, as the linear average of the target share and the scale limited target
+    # based on the maturity level of the pool as compared to the entry window
+    # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self):
         scale_limit_factor = min(1, self.maturity / Params.entry_window)
         target_factor = max(0, 1 - self.maturity / Params.entry_window)
@@ -121,6 +110,7 @@ class Pool:
     def unnorm_adjusted_share(self):
         return cached_call(self.cache, "unnorm_adjusted_share", self.unnorm_adjusted_share_)
 
+    #Then we apply a final renormalization so that again the total of all adjsuted shares is 99%
     def adjusted_share_(self):
         return self.unnorm_adjusted_share() * self.pools.adjustment_renormalization_factor()
     def adjusted_share(self):
