@@ -17,9 +17,11 @@ When it's time for a new adjustment proposal, the view branch is merged back int
 The data in the main branch is then used to create the on chain adjustment proposal.
 
 
-## Folder Structure
+## Project Structure
 
-- state - Values set via text proposals, such as parameters (scale limit, matching limit, etc.), incentivized pool IDs and matched externals.
-- query - Code to get data from Blockapsis and Imperator APIs
-- process - Code to do the calculations and generate csvs / proposal data
-- data - csv outputs which are auto imported into https://docs.google.com/spreadsheets/d/1A05ELgt-KyMB9pAFvzjKmDcT6UrUorFISeLR64zOoTE/edit?usp=sharing and which are used to generate a proposal
+- Params - Values set via text proposals, such as parameters (scale limit, matching limit, etc.), incentivized pool IDs and matched externals.
+- Query - Functions to get data from Blockapsis and Imperator APIs
+- Pools/Pool - Methods to do the calculations and generate csvs / proposal data
+- Update - Code to update csv files with new data/calculations
+- data - csv outputs which are auto imported into https://docs.google.com/spreadsheets/d/1A05ELgt-KyMB9pAFvzjKmDcT6UrUorFISeLR64zOoTE/edit?usp=sharing, and which are used to generate a proposal
+- Propose - Takes `new_gauges.csv` and generates and submits an onchain poolincentives proposal
