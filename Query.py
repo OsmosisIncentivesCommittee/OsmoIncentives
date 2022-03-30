@@ -1,16 +1,17 @@
 from util import *
 import Params
+from typing import Any, Callable
 
 IMPERATOR = "https://api-osmosis.imperator.co/"
 BLOCKAPSIS = "https://lcd-osmosis.blockapsis.com/osmosis/"
 
-def load_pool(pid):
+def load_pool(pid : int):
     return load_json(IMPERATOR+"pools/v2/"+str(pid))
 
-def load_volume(pid):
+def load_volume(pid : int):
     return load_json(IMPERATOR+"pools/v2/volume/"+str(pid)+"/chart")
 
-def load_gauge_ids(pid):
+def load_gauge_ids(pid : int) -> dict[str, int]:
     gs = load_json(BLOCKAPSIS+"pool-incentives/v1beta1/gauge-ids/"+str(pid))["gauge_ids_with_duration"]
     return {g["duration"]:int(g["gauge_id"]) for g in gs}
 
@@ -21,22 +22,22 @@ def load_tokens():
     token_data = load_json(IMPERATOR+"tokens/v2/all")
     return {x["symbol"] : {"price":float(x["price"]), "denom":x["denom"], "exponent":x["exponent"]} for x in token_data}
 
-def load_symbols():
+def load_symbols() -> dict[str, str]:
     token_data = load_json(IMPERATOR+"tokens/v2/all")
     return {x["denom"] : x["symbol"] for x in token_data}
 
-def load_total_lp_spend():
+def load_total_lp_spend() -> float:
     daily_osmo_issuance = float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000
     lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
     return Params.total_incentive_share * daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
 
 #FIXME pagination limits on the gauges query
-def load_external_gauges(pid):
+def load_external_gauges(pid : int) -> dict[str, Any]:
     tokens = load_tokens()
     symbols = load_symbols()
     gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges")["data"]
 
-    is_external = lambda g: all([
+    is_external : Callable[[dict[str, Any]],bool] = lambda g: all([
         g["distribute_to"]["denom"] == "gamm/pool/"+str(pid), # paid to this pool
         not g["is_perpetual"],                                # not perpetual (so this math works)
         int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]) + 7,   # won't end in the next week   
@@ -46,7 +47,7 @@ def load_external_gauges(pid):
     ])
         
 
-    external_gauges = {}
+    external_gauges : dict[str, Any] = {}
     for g in gauges_data:
         if is_external(g):
             denom = g["coins"][0]["denom"]
