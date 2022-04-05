@@ -1,9 +1,9 @@
 name: AutoUpdate
-  on:
-    schedule:
-      - cron: "0 * * * *"
-  jobs:
-    AutoUpdate:
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  AutoUpdate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout liveview

@@ -1,9 +1,9 @@
 name: MakeProposal
-  on:
-    schedule:
-      - cron: "0 5 * * 1"
-  jobs:
-    Propose:
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+jobs:
+  Propose:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
