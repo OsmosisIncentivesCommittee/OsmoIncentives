@@ -19,7 +19,7 @@ jobs:
         run: git fetch
 
       - name: Rebase Staging
-        run: git rebase staging
+        run: git rebase origin/staging
       
       - name: Reset Prior Update
         run: git reset HEAD~1
