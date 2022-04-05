@@ -1,0 +1,36 @@
+name: AutoUpdate
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  AutoUpdate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout liveview
+        uses: actions/checkout@v3
+        with:
+          ref: liveview
+      
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Rebase Staging
+        run: git rebase staging
+      
+      - name: Reset Prior Update
+        run: git reset HEAD~1
+
+      - name: Run Update.py
+        run: python3 Update.py
+      
+      - name: Add new data files
+        run: git add .
+
+      - name: Commit
+        run: git commit -m "Auto Update data files"
+      
+      - name: Force Push
+        run: git push --force
+
