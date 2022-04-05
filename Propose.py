@@ -1,25 +1,18 @@
-
-#generate a the gaugeid/weight pairs for a command, compare to live sheet
 import datetime
 from util import read_csv
+import subprocess
 
 new_gauges = {x[0] : x[1] for x in read_csv("data/new_gauges.csv")}
 
+last_commit_message : str = subprocess.run(["git","log","-l","--pretty=%B"], capture_output=True).stdout.decode("utf-8")
+
 description = """
-[Link to sheet displaying this proposal](todo.xyz)\n
-[Link to auto-updating sheet for upcoming proposal](todo.xyz)\n
-[Link to Github implementation of the adjustment process](todo.xyz)\n\n
+[Link to sheet displaying this proposal](https://docs.google.com/spreadsheets/d/1A05ELgt-KyMB9pAFvzjKmDcT6UrUorFISeLR64zOoTE/edit?usp=sharing)\n
+[Link to auto-updating sheet for upcoming proposal](https://docs.google.com/spreadsheets/d/1_LQIC9KkTRoZjBGAxluCzr2oil4AaUorXSY3QGR9JnI/edit?usp=sharing)\n
+[Link to Github implementation of the adjustment process](https://github.com/UnityChaos/OsmoIncentives)\n\n
+""" + last_commit_message
 
-"""
-
-    #TODO
-    # description should have:
-    # static - link to "current proposal sheet"
-    # static - link to "live updating / next proposal sheet"
-    # static - link to repo
-    # dynamic - text of most recent commit to main
-
-cmd = " ".join([
+cmd = [
     "osmosisd",
     "tx",
     "gov",
@@ -27,15 +20,16 @@ cmd = " ".join([
     "update-pool-incentives",
     ",".join(list(new_gauges.keys())),
     ",".join(list(new_gauges.values())),
-    "--chain-id=osmosis-1",
     "--deposit=0uosmo",
-    "--from=osmosis",
+    "--from=temp",
+    "--keyring-backend=test",
     '--title="Regular Incentive adjustment for '+ str(datetime.date.today()) +'"',
     '--description="' + description + '"',
+    '--chain-id=osmo-test-4', #TODO change to mainnet
+    '--gas=999999', #TODO will need money on account for gas fees to auto submit proposals 
+    "-y",
+]
 
+print("Proposal command to run: ", " ".join(cmd))
 
-])
-
-print(cmd)
-
-#TODO use subprocess to execute the command
+subprocess.run(cmd)

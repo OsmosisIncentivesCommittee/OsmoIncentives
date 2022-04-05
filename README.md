@@ -19,9 +19,16 @@ The data in the main branch is then used to create the on chain adjustment propo
 
 ## Project Structure
 
-- Params - Values set via text proposals, such as parameters (scale limit, matching limit, etc.), incentivized pool IDs and matched externals.
-- Query - Functions to get data from Blockapsis and Imperator APIs
-- Pools/Pool - Methods to do the calculations and generate csvs / proposal data
-- Update - Code to update csv files with new data/calculations
-- data - csv outputs which are auto imported into https://docs.google.com/spreadsheets/d/1A05ELgt-KyMB9pAFvzjKmDcT6UrUorFISeLR64zOoTE/edit?usp=sharing, and which are used to generate a proposal
-- Propose - Takes `new_gauges.csv` and generates and submits an onchain poolincentives proposal
+- Params.py - Values set via text proposals, such as parameters (scale limit, matching limit, etc.), incentivized pool IDs and matched externals.
+- Query.py - Functions to get data from Blockapsis and Imperator APIs
+- Pools.py/Pool.py - Methods to do the calculations and generate csvs / proposal data
+- Update.py - Code to update csv files with new data/calculations
+- data/ - csv outputs which are auto imported into [Current Proposal]() and [Prospective Proposal]() spreadsheets and which are used to generate a proposal
+- Propose.py - Takes `data/new_gauges.csv` and generates and submits an onchain poolincentives proposal
+
+## Current Incentives Calculation
+
+- external incentives matching
+- biased subsidy targets
+- scale limiting
+- maturity based scale bypass
