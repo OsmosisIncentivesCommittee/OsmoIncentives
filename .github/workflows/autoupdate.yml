@@ -6,17 +6,14 @@ jobs:
   AutoUpdate:
     runs-on: ubuntu-latest
     steps:
-    
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.9'
-          
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: liveview
-          
       - name: Fetch, Rebase, Reset, Update, Commit, and Push
         run: |
           git config user.name github-actions
