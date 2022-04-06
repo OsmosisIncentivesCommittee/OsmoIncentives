@@ -12,11 +12,13 @@ jobs:
         with:
           python-version: '3.9'
           
-      - name: Checkout, Fetch, Rebase, Reset, Update, Commit, and Push
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: liveview
-      - run: |
+          
+      - name: Fetch, Rebase, Reset, Update, Commit, and Push
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git fetch
