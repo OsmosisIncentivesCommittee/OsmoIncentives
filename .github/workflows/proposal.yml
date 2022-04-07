@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: '3.9'
+      - name: Fetch
+        run: git fetch
       
       - name: Checkout staging
         run: git checkout staging
