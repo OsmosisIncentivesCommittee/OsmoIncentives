@@ -17,7 +17,7 @@ jobs:
       - name: Config name
         run: git config user.name github-actions
       - name: Config email
-        run:     git config user.email github-actions@github.com
+        run: git config user.email github-actions@github.com
       - name: Fetch
         run: git fetch
       - name: Rebase
