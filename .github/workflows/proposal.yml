@@ -1,33 +1,49 @@
 name: MakeProposal
 on:
   schedule:
-    - cron: "0 5 * * 1"
+    - cron: "*/5 * * * *"
 jobs:
   Propose:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout main
         uses: actions/checkout@v3
         with:
           ref: main
-
-      # - name: Setup go
-      #   uses: actions/setup-go@v3
-      #   with:
-      #     go-version: '>=1.17.0'
       
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.9'
       
+      - name: Checkout staging
+        run: git checkout staging
+    
+      - name: Merge liveview
+        run: git merge liveview #TODO theirs
+      
+      - name: Checkout main
+        run: git checkout main
+      
+      - name: Squash merge staging
+        run: git merge --squash staging #TODO theirs
+      
+      - name: Commit main
+        run: git commit -m "Merged staging to main" #TODO make this concat of staging commit messages
+      
+      - name: Push main
+        run: git push
+      
       - name: install osmosis binary with hardcoded version
         uses: wei/wget@v1.1.1
         with:
           args: -O osmosisd https://github.com/osmosis-labs/osmosis/releases/download/v7.1.0/osmosisd-7.1.0-linux-amd64
 
-      # - name: setup keys via secrets
-        #TODO
+      - name: load proposer key
+        env:
+          KEY: ${{ secrets.KEY }}
+        run: echo $KEY | osmosisd keys add proposer --recover --keyring-backend=test
 
       - name: run make proposal script
         run: python3 Propose.py

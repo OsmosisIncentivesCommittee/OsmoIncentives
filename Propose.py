@@ -21,11 +21,12 @@ cmd = [
     ",".join(list(new_gauges.keys())),
     ",".join(list(new_gauges.values())),
     "--deposit=0uosmo",
-    "--from=temp",
+    "--from=proposer",
     "--keyring-backend=test",
     '--title="Regular Incentive adjustment for '+ str(datetime.date.today()) +'"',
     '--description="' + description + '"',
     '--chain-id=osmo-test-4', #TODO change to mainnet
+    '--node=https://testnet-rpc.osmosis.zone:443', #TODO change to mainnet
     '--gas=999999', #TODO will need money on account for gas fees to auto submit proposals 
     "-y",
 ]
