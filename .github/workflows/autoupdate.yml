@@ -19,8 +19,8 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git fetch
-          git rebase origin/staging
           git reset --hard HEAD~1
+          git rebase origin/staging
           python3 Update.py
           git add .
           git commit -m "Auto Update data files"
