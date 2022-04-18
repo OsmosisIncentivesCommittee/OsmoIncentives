@@ -13,7 +13,7 @@ description = """
 """ + last_commit_message
 
 cmd = [
-    "osmosisd",
+    "./osmosisd",
     "tx",
     "gov",
     "submit-proposal",

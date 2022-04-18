@@ -46,6 +46,21 @@ jobs:
       
       - name: Push main
         run: git push
+
+      - name: Checkout staging
+        run: git checkout staging
+      
+      - name: Rebase to main
+        run: git rebase -Xtheirs main
+      
+      - name: Reset to main
+        run: git reset --hard main
+
+      - name: Checkout liveview
+        run: git checkout liveview
+      
+      - name: Rebase liveview to main/staging
+        run: git rebase -Xtheirs main
       
       - name: install osmosis binary with hardcoded version
         uses: wei/wget@v1.1.1
@@ -55,7 +70,7 @@ jobs:
       - name: load proposer key
         env:
           KEY: ${{ secrets.KEY }}
-        run: echo $KEY | osmosisd keys add proposer --recover --keyring-backend=test
+        run: echo $KEY | ./osmosisd keys add proposer --recover --keyring-backend=test
 
       - name: run make proposal script
         run: python3 Propose.py

@@ -23,7 +23,7 @@ jobs:
       - name: Rebase
         run: git rebase -Xtheirs origin/staging
       - name: Reset
-        run: git reset --hard HEAD~1
+        run: git reset --hard origin/staging
       - name: Update
         run: python3 Update.py
       - name: Add
