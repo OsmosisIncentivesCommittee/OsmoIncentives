@@ -53,8 +53,11 @@ jobs:
       - name: Rebase to main
         run: git rebase -Xtheirs main
       
-      - name: Reset to main
+      - name: Reset staging to main
         run: git reset --hard main
+
+      - name: Push Staging
+        run: git push --force
 
       - name: Checkout liveview
         run: git checkout liveview
@@ -62,10 +65,19 @@ jobs:
       - name: Rebase liveview to main/staging
         run: git rebase -Xtheirs main
       
+      - name: Reset liveview to main
+        run: git reset --hard main
+
+      - name: Push liveview
+        run: git push --force
+
       - name: install osmosis binary with hardcoded version
         uses: wei/wget@v1.1.1
         with:
           args: -O osmosisd https://github.com/osmosis-labs/osmosis/releases/download/v7.1.0/osmosisd-7.1.0-linux-amd64
+      
+      - name: chmod
+        run: chmod +x ./osmosisd
 
       - name: load proposer key
         env:
