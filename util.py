@@ -40,7 +40,7 @@ def days_from_now(n : int) -> datetime.datetime:
     return datetime.datetime.now() + datetime.timedelta(days=7)
 
 def write_csv(name : str, lines : list[str]) -> None:
-    with open(name, "w") as f:
+    with open(name, "w+") as f:
         f.write("\n".join(lines))
 
 def read_csv(name : str) -> list[list[str]]:
