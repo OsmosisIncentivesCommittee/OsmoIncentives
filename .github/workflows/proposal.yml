@@ -71,21 +71,17 @@ jobs:
       - name: Push liveview
         run: git push --force
 
-      - name: install osmosis binary with hardcoded version
-        uses: wei/wget@v1.1.1
-        with:
-          args: -O osmosisd https://github.com/osmosis-labs/osmosis/releases/download/v7.1.0/osmosisd-7.1.0-linux-amd64
-
-      - name: stat osmosisd
-        run: stat osmosisd
-      
-      - name: chmod
-        run: sudo chmod +x ./osmosisd
+      - name: install osmosis
+        run: |
+          git clone https://github.com/osmosis-labs/osmosis
+          cd osmosis
+          git checkout v7.2.0
+          make install
 
       - name: load proposer key
         env:
           KEY: ${{ secrets.KEY }}
-        run: echo $KEY | ./osmosisd keys add proposer --recover --keyring-backend=test
+        run: echo $KEY | osmosisd keys add proposer --recover --keyring-backend=test
 
       - name: run make proposal script
         run: python3 Propose.py
