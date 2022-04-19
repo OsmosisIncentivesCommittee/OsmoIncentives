@@ -75,9 +75,12 @@ jobs:
         uses: wei/wget@v1.1.1
         with:
           args: -O osmosisd https://github.com/osmosis-labs/osmosis/releases/download/v7.1.0/osmosisd-7.1.0-linux-amd64
+
+      - name: stat osmosisd
+        run: stat osmosisd
       
       - name: chmod
-        run: chmod +x ./osmosisd
+        run: sudo chmod +x ./osmosisd
 
       - name: load proposer key
         env:
