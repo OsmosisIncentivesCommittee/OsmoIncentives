@@ -23,7 +23,7 @@ class Pool:
         self.gauge_ids = Query.load_gauge_ids(pid)
 
         self.assets = [a["symbol"] for a in pd]
-        self.bias = "OSMO" in self.assets and 1+Params.osmo_bias or 1-Params.osmo_bias
+        self.bias = get_bias(self.assets)
 
         self.cache : dict[str, Any] = {}
 

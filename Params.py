@@ -12,8 +12,24 @@ matched_pool_ids = [
     611, 612, 618, 619, 637, 638, 641, 643, 648, 651
     ]
 
+Majors = ["ATOM", "LUNA", "CRO"]
 
-osmo_bias = 0.5
+Stables = ["UST"]
+
+#Osms Stability / Liquidity
+osmo_stable_bias = 2.0
+
+#Capture volume in Major coins from external markets
+osmo_major_bias = 2.0
+major_stable_bias = 1.0
+
+#Pay base incentives to keep volume in Minor token on Osmosis
+osmo_minor_bias = 1.5
+
+#Non Osmo or Stable base pools
+others_bias = 0.5
+
+
 match_limit = 0.30
 adjust_scale = 0.25
 entry_window = 4

@@ -2,6 +2,7 @@ import json
 import urllib.request
 import datetime
 from typing import Any, Callable
+import Params
 
 def load_json_(url : str) -> Any:
     return json.loads(urllib.request.urlopen(urllib.request.Request(url)).read().decode('utf-8'))
@@ -46,6 +47,22 @@ def write_csv(name : str, lines : list[str]) -> None:
 def read_csv(name : str) -> list[list[str]]:
     with open(name, "r") as f:
         return [x.strip().split(",") for x in f.readlines()]
+
+def get_bias(l : list[str]) -> float:
+    (base, asset) = based(l)
+    if base == "OSMO":
+        if asset in Params.Stables:
+            return Params.osmo_stable_bias
+        if asset in Params.Majors:
+            return Params.osmo_major_bias
+        else:
+            return Params.osmo_minor_bias
+    elif base in Params.Stables:
+        if asset in Params.Majors:
+            return Params.major_stable_bias
+    return Params.others_bias
+        
+
 
 def based(l : list[str]) -> tuple[str, str]:
     a = l[0]
