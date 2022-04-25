@@ -33,7 +33,7 @@ class Pools:
 
 
     def total_adjusted_revenue_for(self, cat : str) -> int:
-        return sum([p.adjusted_revenue() for p in self.pools.values()])
+        return sum([p.adjusted_revenue() for p in self.pools.values() if p.category == cat])
 
     # def match_share_renormalization_factor(self) -> float:
     #     return cached_call(self.cache, "match_share_renormalization_factor", lambda:  
