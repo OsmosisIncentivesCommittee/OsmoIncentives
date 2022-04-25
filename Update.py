@@ -21,7 +21,7 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         pool.liquidity,
         pool.fees_collected,
         fee_apr,
-        pool.bias,
+        pool.category,
         cur_share,
         osmo_apr,
         external_apr,

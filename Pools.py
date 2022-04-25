@@ -31,15 +31,19 @@ class Pools:
     def avg_subsidy(self) -> float:
         return Query.load_total_lp_spend() / self.total_fees()
 
-    def match_share_renormalization_factor(self) -> float:
-        return cached_call(self.cache, "match_share_renormalization_factor", lambda:  
-            min(1, Params.match_limit / sum([p.unnorm_match_share() for p in self.pools.values()]))
-        )
 
-    def target_renormalization_factor(self) -> float:
-        return cached_call(self.cache, "target_renormalization_factor", lambda:
-            Params.total_incentive_share / sum([p.unnorm_target_share() for p in self.pools.values()])
-        )
+    def total_adjusted_revenue_for(self, cat : str) -> int:
+        return sum([p.adjusted_revenue() for p in self.pools.values()])
+
+    # def match_share_renormalization_factor(self) -> float:
+    #     return cached_call(self.cache, "match_share_renormalization_factor", lambda:  
+    #         min(1, Params.match_limit / sum([p.unnorm_match_share() for p in self.pools.values()]))
+    #     )
+
+    # def target_renormalization_factor(self) -> float:
+    #     return cached_call(self.cache, "target_renormalization_factor", lambda:
+    #         Params.total_incentive_share / sum([p.unnorm_target_share() for p in self.pools.values()])
+    #     )
 
     def scale_limit_renormalization_factor(self) -> float:
         return cached_call(self.cache, "scale_limit_renormalization_factor", lambda:

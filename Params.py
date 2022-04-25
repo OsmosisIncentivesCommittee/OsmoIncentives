@@ -16,18 +16,15 @@ Majors = ["ATOM", "LUNA", "CRO"]
 
 Stables = ["UST"]
 
-#Osms Stability / Liquidity
-osmo_stable_bias = 2.0
+Category_weights = {
+    "OSMO_MAJOR" : 0.40,
+    "OSMO_STABLE" : 0.30,
+    "OSMO_MINOR" : 0.20,
+    "MAJOR_STABLE" : 0.05,
+    "OTHERS" : 0.05
+}
 
-#Capture volume in Major coins from external markets
-osmo_major_bias = 2.0
-major_stable_bias = 1.0
 
-#Pay base incentives to keep volume in Minor token on Osmosis
-osmo_minor_bias = 1.5
-
-#Non Osmo or Stable base pools
-others_bias = 0.5
 
 
 match_limit = 0.30

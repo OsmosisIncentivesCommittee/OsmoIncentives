@@ -48,19 +48,19 @@ def read_csv(name : str) -> list[list[str]]:
     with open(name, "r") as f:
         return [x.strip().split(",") for x in f.readlines()]
 
-def get_bias(l : list[str]) -> float:
+def categorize(l : list[str]) -> str:
     (base, asset) = based(l)
     if base == "OSMO":
         if asset in Params.Stables:
-            return Params.osmo_stable_bias
+            return "OSMO_STABLE"
         if asset in Params.Majors:
-            return Params.osmo_major_bias
+            return "OSMO_MAJOR"
         else:
-            return Params.osmo_minor_bias
+            return "OSMO_MINOR"
     elif base in Params.Stables:
         if asset in Params.Majors:
-            return Params.major_stable_bias
-    return Params.others_bias
+            return "MAJOR_STABLE"
+    return "OTHERS"
         
 
 
