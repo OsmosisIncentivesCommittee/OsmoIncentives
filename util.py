@@ -60,6 +60,8 @@ def categorize(l : list[str]) -> str:
     elif base in Params.Stables:
         if asset in Params.Majors:
             return "MAJOR_STABLE"
+        if asset in Params.Stables:
+            return "STABLESWAP"
     return "OTHERS"
         
 
@@ -71,10 +73,6 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("OSMO",b)
     elif b == "OSMO":
         return ("OSMO",a)
-    elif a == "ATOM":
-        return ("ATOM",b)
-    elif b == "ATOM":
-        return ("ATOM",a)
     elif a == "UST":
         return ("UST", b)
     elif b == "UST":
@@ -83,6 +81,10 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("EEUR", b)
     elif b == "EEUR":
         return ("EEUR", a)
+    elif a == "ATOM":
+        return ("ATOM",b)
+    elif b == "ATOM":
+        return ("ATOM",a)
     print("assets not based? : ", l)
     return ("","")
     
