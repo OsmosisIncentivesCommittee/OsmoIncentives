@@ -5,12 +5,14 @@ from util import *
 
 class Pools:
     def __init__(self):
-        self.pools = {pid : Pool(self, pid) for pid in Params.incentivized_pool_ids}
+        
 
         distr_info = Query.load_distr_info()
         self.gauge_weights = {int(r["gauge_id"]) : int(r["weight"]) for r in distr_info["records"]}
         self.total_weight = int(distr_info["total_weight"])
         self.cache : dict[str, Any] = {}
+
+        self.pools = {pid : Pool(self, pid) for pid in Params.incentivized_pool_ids}
 
     def get_current_share(self, gids : dict[str, int]):
         return sum([self.gauge_weights.get(gid,0) for gid in gids.values()])/self.total_weight

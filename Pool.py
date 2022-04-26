@@ -12,7 +12,8 @@ class Pool:
         
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
-        self.maturity = min(4, int(len(vol)/7))
+        self.gauge_ids = Query.load_gauge_ids(pid)
+        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
         
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
@@ -22,7 +23,7 @@ class Pool:
 
         # self.adjusted_revenue = self.fees_collected + (se)
         
-        self.gauge_ids = Query.load_gauge_ids(pid)
+        
 
         self.assets = [a["symbol"] for a in pd]
         self.category = categorize(self.assets)
@@ -31,9 +32,11 @@ class Pool:
 
 
     def adjusted_revenue(self) -> int:
+        #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
+        capped_fees = min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr() * self.liquidity)
         if self.pid in Params.matched_pool_ids:
-            return self.fees_collected + min(self.fees_collected, self.external_per_day)
-        return self.fees_collected
+            return capped_fees+ min(capped_fees, self.external_per_day)
+        return capped_fees
     
     def target_share(self) -> float:
         w = Params.Category_weights[self.category]

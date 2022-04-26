@@ -21,8 +21,8 @@ Category_weights = {
     "OSMO_STABLE" : 0.30,
     "OSMO_MINOR" : 0.20,
     "MAJOR_STABLE" : 0.05,
-    "STABLESWAP" : 0.0001,
-    "OTHERS" : 0.04999
+    "STABLESWAP" : 0.001,
+    "OTHERS" : 0.0499
 }
 
 
