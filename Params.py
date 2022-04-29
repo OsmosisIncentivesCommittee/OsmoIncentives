@@ -34,7 +34,9 @@ Minimums = {
 match_limit = 0.30
 adjust_scale = 0.25
 entry_window = 4
+
 swap_fee_cap = 3
+match_multiple_cap = 10
 
 share_1 = 0.5
 share_7 = 0.3
