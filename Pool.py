@@ -33,7 +33,7 @@ class Pool:
 
     def adjusted_revenue(self) -> int:
         #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
-        capped_fees = min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr() * self.liquidity)
+        capped_fees = min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
         if self.pid in Params.matched_pool_ids:
             return capped_fees+ min(capped_fees, self.external_per_day)
         return capped_fees

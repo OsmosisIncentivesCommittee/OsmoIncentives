@@ -17,21 +17,21 @@ class Pools:
     def get_current_share(self, gids : dict[str, int]):
         return sum([self.gauge_weights.get(gid,0) for gid in gids.values()])/self.total_weight
 
-    def total_liquidity(self) -> int:
+    def total_liquidity(self, category : str) -> int:
         return cached_call(self.cache, "total_liquidity", lambda:
-            sum([p.liquidity for p in self.pools.values()])
+            sum([p.liquidity for p in self.pools.values() if p.category == category])
         )
     
-    def total_fees(self) -> int:
+    def total_fees(self, category : str) -> int:
         return cached_call(self.cache, "total_fees", lambda: 
-            sum([p.fees_collected for p in self.pools.values()])
+            sum([p.fees_collected for p in self.pools.values() if p.category == category])
         )
 
-    def avg_fee_apr(self) -> float:
-        return (52 * self.total_fees()) / self.total_liquidity()
+    def avg_fee_apr(self, category : str) -> float:
+        return (52 * self.total_fees(category)) / self.total_liquidity(category)
 
-    def avg_subsidy(self) -> float:
-        return Query.load_total_lp_spend() / self.total_fees()
+    # def avg_subsidy(self) -> float:
+    #     return Query.load_total_lp_spend() / self.total_fees()
 
 
     def total_adjusted_revenue_for(self, cat : str) -> int:
