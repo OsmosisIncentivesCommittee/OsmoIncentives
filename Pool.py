@@ -42,7 +42,7 @@ class Pool:
         w = Params.Category_weights[self.category]
         ar = self.adjusted_revenue()
         car = self.pools.total_adjusted_revenue_for(self.category)
-        return (w * ar) / car 
+        return max(Params.Minimums.get(self.pid,0), (w * ar) / car)
 
 
     #Compute the share of incentives needed to match external incentives on this pool

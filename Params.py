@@ -25,7 +25,10 @@ Category_weights = {
     "OTHERS" : 0.0499
 }
 
-
+Minimums = {
+    1 : 0.25,
+    560 : 0.25
+}
 
 
 match_limit = 0.30
