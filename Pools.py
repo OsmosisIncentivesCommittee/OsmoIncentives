@@ -23,9 +23,10 @@ class Pools:
         )
     
     def total_fees(self, category : str) -> int:
-        return cached_call(self.cache, "total_fees", lambda: 
-            sum([p.fees_collected for p in self.pools.values() if p.category == category])
-        )
+        return sum([p.fees_collected for p in self.pools.values() if p.category == category])
+    
+    def total_capped_fees(self, category : str) -> int:
+        return sum([p.capped_fees() for p in self.pools.values() if p.category == category])
 
     def avg_fee_apr(self, category : str) -> float:
         return (52 * self.total_fees(category)) / self.total_liquidity(category)

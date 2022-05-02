@@ -29,20 +29,29 @@ class Pool:
         self.category = categorize(self.assets)
 
         self.cache : dict[str, Any] = {}
-
+    def capped_fees(self) -> int:
+        return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
 
     def adjusted_revenue(self) -> int:
         #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
-        capped_fees = min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
+        cf = self.capped_fees()
         if self.pid in Params.matched_pool_ids:
-            return capped_fees+ min(capped_fees * Params.match_multiple_cap, self.external_per_day)
-        return capped_fees
+            return cf+self.external_per_day
+        return cf
+    def fee_share(self) -> float:
+        return self.capped_fees() / self.pools.total_capped_fees(self.category)
+
+    def adjusted_revenue_share(self) -> float:
+        return self.adjusted_revenue() / self.pools.total_adjusted_revenue_for(self.category)
+
+    def match_capped_share(self) -> float:
+        return min((1+Params.match_multiple_cap)*self.fee_share(), self.adjusted_revenue_share())
     
     def target_share(self) -> float:
         w = Params.Category_weights[self.category]
-        ar = self.adjusted_revenue()
-        car = self.pools.total_adjusted_revenue_for(self.category)
-        return max(Params.Minimums.get(self.pid,0), (w * ar) / car)
+
+        #match at least the minimum specified for this pool
+        return max(Params.Minimums.get(self.pid,0), w * self.match_capped_share())
 
 
     #Compute the share of incentives needed to match external incentives on this pool
