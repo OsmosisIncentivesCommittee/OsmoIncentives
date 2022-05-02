@@ -51,7 +51,9 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
     for g in gauges_data:
         if is_external(g):
             denom = g["coins"][0]["denom"]
-            symbol = symbols[denom]
+            symbol = symbols.get(denom,None)
+            if symbol == None:
+                continue
             exponent = tokens[symbol]["exponent"]
             amount = int(g["coins"][0]["amount"])/pow(10, exponent)
             price = tokens[symbol]["price"]
