@@ -19,20 +19,20 @@ class Pools:
 
     def total_liquidity(self, category : str) -> int:
         return cached_call(self.cache, "total_liquidity", lambda:
-            sum([p.liquidity for p in self.pools.values() if p.category == category])
+            sum([p.liquidity for p in self.pools.values() if category=="" or p.category == category])
         )
     
     def total_fees(self, category : str) -> int:
-        return sum([p.fees_collected for p in self.pools.values() if p.category == category])
+        return sum([p.fees_collected for p in self.pools.values() if category=="" or p.category == category])
     
     def total_capped_fees(self, category : str) -> int:
-        return sum([p.capped_fees() for p in self.pools.values() if p.category == category])
+        return sum([p.capped_fees() for p in self.pools.values() if category=="" or p.category == category])
 
     def avg_fee_apr(self, category : str) -> float:
         return (52 * self.total_fees(category)) / self.total_liquidity(category)
 
-    def total_adjusted_revenue_for(self, cat : str) -> int:
-        return sum([p.adjusted_revenue() for p in self.pools.values() if p.category == cat])
+    def total_adjusted_revenue_for(self, category : str) -> int:
+        return sum([p.adjusted_revenue() for p in self.pools.values() if category=="" or p.category == category])
 
     def scale_limit_renormalization_factor(self) -> float:
         return cached_call(self.cache, "scale_limit_renormalization_factor", lambda:

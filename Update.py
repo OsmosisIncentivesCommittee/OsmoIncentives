@@ -45,9 +45,9 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
 def get_headers(pools: Pools) -> list[str]:
     return list(map(str, [
         "Category",
-        "Pool ID"
-        "Base Asset"
-        "Pair Asset"
+        "Pool ID",
+        "Base Asset",
+        "Pair Asset",
         "Liquidity",
         "Fees Collected",
         "Capped Fees",
@@ -74,29 +74,29 @@ def get_headers(pools: Pools) -> list[str]:
 def get_totals(pools: Pools) -> list[str]:
     return list(map(str, [
         "",
-        ""
-        ""
-        ""
-        "Liquidity",
-        "Fees Collected",
-        "Capped Fees",
-        "",
-        "External $ Per Day",
-        "Adjusted Revenue",
-        "",
-        "",
-        "Fee APR",
-        "Current Share",
-        "Current Osmo APR"
-        "External APR",
-        "",
-        "Target Share",
         "",
         "",
         "",
-        "New Osmo APR",
-        "Current Total APR",
-        "New Total APR",
+        pools.total_liquidity(""),
+        pools.total_fees(""),
+        pools.total_capped_fees(""),
+        "",
+        sum([p.external_per_day for p in pools.pools.values()]),
+        pools.total_adjusted_revenue_for(""),
+        "",
+        "",
+        pools.avg_fee_apr(""),
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         "",
     ]))
 
