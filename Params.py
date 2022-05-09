@@ -25,6 +25,15 @@ Category_weights = {
     "OTHERS" : 0.0499
 }
 
+Category_Order = {
+    "OSMO_STABLE" : 0,
+    "OSMO_MAJOR" : 1,
+    "MAJOR_STABLE" : 2,
+    "STABLESWAP" : 3,
+    "OSMO_MINOR" : 4,
+    "OTHERS" : 5
+}
+
 Minimums = {
     1 : 0.25,
     560 : 0.25

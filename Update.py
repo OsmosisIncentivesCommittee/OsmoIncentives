@@ -58,7 +58,7 @@ def get_headers(pools: Pools) -> list[str]:
         "Match Capped Share",
         "Fee APR",
         "Current Share",
-        "Current Osmo APR"
+        "Current Osmo APR",
         "External APR",
         "Is Matched",
         "Target Share",
@@ -102,9 +102,9 @@ def get_totals(pools: Pools) -> list[str]:
 
 def update() -> None:
     pools = Pools()
-    lines = [",".join(get_headers(pools))] + [",".join(get_totals(pools))] + sorted([
-        ",".join(get_columns(pools, pools.pools[pid]))
-        for pid in sorted(pools.pools.keys())], key=lambda x: x[0])
+    lines = [",".join(get_headers(pools))] + [",".join(get_totals(pools))] + [
+        ",".join(get_columns(pools, p))
+        for p in sorted(pools.pools.values(), key=lambda x: Params.Category_Order[x.category])]
 
     write_csv("data/incentives.csv", lines)
 
