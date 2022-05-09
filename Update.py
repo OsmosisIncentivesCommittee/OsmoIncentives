@@ -15,6 +15,7 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
     cur_total = osmo_apr + fee_apr + external_apr
     new_total = new_osmo_apr + fee_apr + external_apr
     return list(map(str, [
+        pool.category,
         pool.pid,
         based_assets[0],
         based_assets[1],
@@ -27,7 +28,6 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         pool.adjusted_revenue_share(),
         pool.match_capped_share(),
         fee_apr,
-        pool.category,
         cur_share,
         osmo_apr,
         external_apr,
@@ -42,11 +42,69 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         (new_total / cur_total) - 1
     ]))
 
+def get_headers(pools: Pools) -> list[str]:
+    return list(map(str, [
+        "Category",
+        "Pool ID"
+        "Base Asset"
+        "Pair Asset"
+        "Liquidity",
+        "Fees Collected",
+        "Capped Fees",
+        "Fee share",
+        "External $ Per Day",
+        "Adjusted Revenue",
+        "Adjusted Revenue Share",
+        "Match Capped Share",
+        "Fee APR",
+        "Current Share",
+        "Current Osmo APR"
+        "External APR",
+        "Is Matched",
+        "Target Share",
+        "Imbalance",
+        "Maturity",
+        "Adjusted Share",
+        "New Osmo APR",
+        "Current Total APR",
+        "New Total APR",
+        "Effective APR Change",
+    ]))
+
+def get_totals(pools: Pools) -> list[str]:
+    return list(map(str, [
+        "",
+        ""
+        ""
+        ""
+        "Liquidity",
+        "Fees Collected",
+        "Capped Fees",
+        "",
+        "External $ Per Day",
+        "Adjusted Revenue",
+        "",
+        "",
+        "Fee APR",
+        "Current Share",
+        "Current Osmo APR"
+        "External APR",
+        "",
+        "Target Share",
+        "",
+        "",
+        "",
+        "New Osmo APR",
+        "Current Total APR",
+        "New Total APR",
+        "",
+    ]))
+
 def update() -> None:
     pools = Pools()
-    lines = [
+    lines = [",".join(get_headers(pools))] + [",".join(get_totals(pools))] + sorted([
         ",".join(get_columns(pools, pools.pools[pid]))
-        for pid in sorted(pools.pools.keys())]
+        for pid in sorted(pools.pools.keys())], key=lambda x: x[0])
 
     write_csv("data/incentives.csv", lines)
 
