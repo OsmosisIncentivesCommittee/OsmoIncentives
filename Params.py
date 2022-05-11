@@ -14,7 +14,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "LUNA", "CRO"]
 
-Stables = ["UST", "EEUR", "USDC"]
+Stables = ["UST", "EEUR", "axlUSDC"]
 
 Category_weights = {
     "OSMO_MAJOR" : 0.40,
