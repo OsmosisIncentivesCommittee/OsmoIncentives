@@ -77,10 +77,10 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("UST", b)
     elif b == "UST":
         return ("UST", a)
-    elif a == "USDC":
-        return ("USDC",b)
-    elif b == "USDC":
-        return ("USDC",a)
+    elif a == "axlUSDC":
+        return ("axlUSDC",b)
+    elif b == "axlUSDC":
+        return ("axlUSDC",a)
     elif a == "EEUR":
         return ("EEUR", b)
     elif b == "EEUR":
