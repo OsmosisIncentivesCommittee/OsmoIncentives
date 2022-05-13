@@ -1,7 +1,7 @@
 name: MakeProposal
 on:
   schedule:
-    - cron: "30 */12 * * *"
+    - cron: "0 20 * * 0"
 jobs:
   Propose:
     runs-on: ubuntu-latest
