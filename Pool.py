@@ -12,68 +12,46 @@ class Pool:
         
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
-        self.maturity = min(4, int(len(vol)/7))
+        self.gauge_ids = Query.load_gauge_ids(pid)
+        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
         
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
         external_gauges = Query.load_external_gauges(self.pid)
-        self.external_per_day = sum([g["daily_value"] for g in external_gauges.values()])
-        
-        self.gauge_ids = Query.load_gauge_ids(pid)
+        self.external_per_day = sum([g["daily_value"] for g in external_gauges.values()])   
 
         self.assets = [a["symbol"] for a in pd]
-        self.bias = "OSMO" in self.assets and 1+Params.osmo_bias or 1-Params.osmo_bias
+        self.category = categorize(self.assets)
 
         self.cache : dict[str, Any] = {}
+    
+    #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
+    def capped_fees(self) -> int:
+        return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
 
+    #share of fees collected by this pool relative to category total    
+    def fee_share(self) -> float:
+        return self.capped_fees() / self.pools.total_capped_fees(self.category)
 
-    #Compute the share of incentives needed to match external incentives on this pool
-    #This is only applies if the pool is being matched, and is equal to:
-    #   The $ per day of the external incentives applied to this pool,
-    #   scaled by capped bias (0.5 for non-osmo pools, 1 for osmo pools)
-    #   and capped at the target $ per day for the pool
-    # Dividied by the total $ per day of LP incentives
-    def unnorm_match_share_(self) -> float:
+    #add external $ per day to capped fees to calculate adjusted revenue
+    def adjusted_revenue(self) -> int:
         if self.pid in Params.matched_pool_ids:
-            return min(
-                self.external_per_day * min(1, self.bias),
-                self.bias * self.pools.avg_subsidy() * self.fees_collected #FIXME apply swap fee cap here too
-            ) / Query.load_total_lp_spend()
-        else:
-            return 0
-    def unnorm_match_share(self) -> float:
-        return cached_call(self.cache, "unnorm_match_share", self.unnorm_match_share_)
+            return self.capped_fees()+self.external_per_day
+        return self.capped_fees()
 
-    #We then renormalize the match share, so that it does not exceed the total match limit
-    def match_share_(self) -> float:
-        return self.pools.match_share_renormalization_factor() * self.unnorm_match_share()
-    def match_share(self) -> float:
-        return cached_call(self.cache, "match_share", self.match_share_)
+    #share of adjusted revenue collected by the pool relative to category total
+    def adjusted_revenue_share(self) -> float:
+        return self.adjusted_revenue() / self.pools.total_adjusted_revenue_for(self.category)
 
+    #cap adjusted revenue share at 1+MMC of fee share (currently 2x original share)
+    def match_capped_share(self) -> float:
+        return min((1+Params.match_multiple_cap)*self.fee_share(), self.adjusted_revenue_share())
     
-    #Compute the target subsidy as the biased average subsidy plus the match subsidy for this pool
-    def target_subsidy_(self) -> float:
-        match_subsidy = self.match_share() * Query.load_total_lp_spend() / self.fees_collected
-        return self.bias * self.pools.avg_subsidy() + match_subsidy
-    def target_subsidy(self) -> float:
-        return cached_call(self.cache, "target_subsidy", self.target_subsidy_)
-    
-    #Compute the target share as the target subsidy multipled by the relative share of fees collected,
-    #   capped at swap_fee_cap multiplied by the avg over all incentivized pools,
-    def unnorm_target_share_(self) -> float:
-        return self.target_subsidy() * min(
-            self.fees_collected / Query.load_total_lp_spend(),
-            (self.pools.avg_fee_apr() * self.liquidity * Params.swap_fee_cap) / (365 * Query.load_total_lp_spend())
-        )
-    def unnorm_target_share(self) -> float:
-        return cached_call(self.cache, "unnorm_target_share", self.unnorm_target_share_)
-
-    #We then renormalize so that the sum over all target shares is 99% (with 1% for community pool)
-    def target_share_(self) -> float:
-        return self.unnorm_target_share() * self.pools.target_renormalization_factor()
+    #translate category share to overall incentives share
     def target_share(self) -> float:
-        return cached_call(self.cache, "target_share", self.target_share_)
+        # match at least the minimum specified for this pool
+        return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())
 
     #Compute the imbbalance as the ratio of the target share as compared to the current share
     #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero

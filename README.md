@@ -23,7 +23,7 @@ The data in the main branch is then used to create the on chain adjustment propo
 - Query.py - Functions to get data from Blockapsis and Imperator APIs
 - Pools.py/Pool.py - Methods to do the calculations and generate csvs / proposal data
 - Update.py - Code to update csv files with new data/calculations
-- data/ - csv outputs which are auto imported into [Current Proposal]() and [Prospective Proposal]() spreadsheets and which are used to generate a proposal
+- data/ - csv outputs which are auto imported into [Current Proposal](https://docs.google.com/spreadsheets/d/1oEn8JtrIU1mze_3Fw4DbbxWBq6yPUM-yAoaOPxG6Y1k/edit?usp=sharing) and [Prospective Proposal]() spreadsheets and which are used to generate a proposal
 - Propose.py - Takes `data/new_gauges.csv` and generates and submits an onchain poolincentives proposal
 
 ## Current Incentives Calculation

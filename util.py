@@ -2,6 +2,7 @@ import json
 import urllib.request
 import datetime
 from typing import Any, Callable
+import Params
 
 def load_json_(url : str) -> Any:
     return json.loads(urllib.request.urlopen(urllib.request.Request(url)).read().decode('utf-8'))
@@ -47,6 +48,24 @@ def read_csv(name : str) -> list[list[str]]:
     with open(name, "r") as f:
         return [x.strip().split(",") for x in f.readlines()]
 
+def categorize(l : list[str]) -> str:
+    (base, asset) = based(l)
+    if base == "OSMO":
+        if asset in Params.Stables:
+            return "OSMO_STABLE"
+        if asset in Params.Majors:
+            return "OSMO_MAJOR"
+        else:
+            return "OSMO_MINOR"
+    elif base in Params.Stables:
+        if asset in Params.Majors:
+            return "MAJOR_STABLE"
+        if asset in Params.Stables:
+            return "STABLESWAP"
+    return "OTHERS"
+        
+
+
 def based(l : list[str]) -> tuple[str, str]:
     a = l[0]
     b = l[1]
@@ -54,18 +73,22 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("OSMO",b)
     elif b == "OSMO":
         return ("OSMO",a)
-    elif a == "ATOM":
-        return ("ATOM",b)
-    elif b == "ATOM":
-        return ("ATOM",a)
     elif a == "UST":
         return ("UST", b)
     elif b == "UST":
         return ("UST", a)
+    elif a == "axlUSDC":
+        return ("axlUSDC",b)
+    elif b == "axlUSDC":
+        return ("axlUSDC",a)
     elif a == "EEUR":
         return ("EEUR", b)
     elif b == "EEUR":
         return ("EEUR", a)
+    elif a == "ATOM":
+        return ("ATOM",b)
+    elif b == "ATOM":
+        return ("ATOM",a)
     print("assets not based? : ", l)
     return ("","")
     

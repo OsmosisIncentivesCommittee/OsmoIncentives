@@ -12,12 +12,40 @@ matched_pool_ids = [
     611, 612, 618, 619, 637, 638, 641, 643, 648, 651
     ]
 
+Majors = ["ATOM", "LUNA", "CRO"]
 
-osmo_bias = 0.5
+Stables = ["UST", "EEUR", "axlUSDC"]
+
+Category_weights = {
+    "OSMO_MAJOR" : 0.40,
+    "OSMO_STABLE" : 0.30,
+    "OSMO_MINOR" : 0.20,
+    "MAJOR_STABLE" : 0.05,
+    "STABLESWAP" : 0.001,
+    "OTHERS" : 0.0499
+}
+
+Category_Order = {
+    "OSMO_STABLE" : 0,
+    "OSMO_MAJOR" : 1,
+    "MAJOR_STABLE" : 2,
+    "STABLESWAP" : 3,
+    "OSMO_MINOR" : 4,
+    "OTHERS" : 5
+}
+
+Minimums = {
+    1 : 0.25,
+    560 : 0.25
+}
+
+
 match_limit = 0.30
 adjust_scale = 0.25
 entry_window = 4
+
 swap_fee_cap = 3
+match_multiple_cap = 1
 
 share_1 = 0.5
 share_7 = 0.3
