@@ -4,7 +4,7 @@ permissions:
 name: AutoUpdate
 on:
   schedule:
-    - cron: "30 * * * *"
+    - cron: "50 * * * *"
 jobs:
   AutoUpdate:
     runs-on: ubuntu-latest
