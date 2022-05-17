@@ -1,3 +1,6 @@
+permissions:
+  actions: write
+  contents: write
 name: AutoUpdate
 on:
   schedule:
