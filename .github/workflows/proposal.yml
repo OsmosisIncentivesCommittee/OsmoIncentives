@@ -1,7 +1,10 @@
+permissions:
+  actions: write
+  contents: write
 name: MakeProposal
 on:
   schedule:
-    - cron: "0 20 * * 0"
+    - cron: "0 22 * * *"
 jobs:
   Propose:
     runs-on: ubuntu-latest
