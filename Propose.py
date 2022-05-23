@@ -7,9 +7,9 @@ new_gauges = {x[0] : x[1] for x in read_csv("data/new_gauges.csv")}
 last_commit_message : str = subprocess.run(["git","log","-l","--pretty=%B"], capture_output=True).stdout.decode("utf-8")
 
 description = """
-[Link to sheet displaying this proposal](https://docs.google.com/spreadsheets/d/1A05ELgt-KyMB9pAFvzjKmDcT6UrUorFISeLR64zOoTE/edit?usp=sharing)\n
-[Link to auto-updating sheet for upcoming proposal](https://docs.google.com/spreadsheets/d/1_LQIC9KkTRoZjBGAxluCzr2oil4AaUorXSY3QGR9JnI/edit?usp=sharing)\n
-[Link to Github implementation of the adjustment process](https://github.com/UnityChaos/OsmoIncentives)\n\n
+[Link to sheet displaying this proposal](https://docs.google.com/spreadsheets/d/1ydQfgEDot0AC9xuT2txc39VBfuum_I1gU_1-GrmrWx4/edit?usp=sharing)\n
+[Link to auto-updating sheet for upcoming proposal](https://docs.google.com/spreadsheets/d/1oEn8JtrIU1mze_3Fw4DbbxWBq6yPUM-yAoaOPxG6Y1k/edit?usp=sharing)\n
+[Link to Github implementation of the adjustment process](https://github.com/OsmosisIncentivesCommittee/OsmoIncentives)\n\n
 """ + last_commit_message
 
 cmd = [
@@ -25,9 +25,10 @@ cmd = [
     "--keyring-backend=test",
     '--title="Regular Incentive adjustment for '+ str(datetime.date.today()) +'"',
     '--description="' + description + '"',
-    '--chain-id=osmo-test-4', #TODO change to mainnet
-    '--node=https://testnet-rpc.osmosis.zone:443', #TODO change to mainnet
-    '--gas=999999', #TODO will need money on account for gas fees to auto submit proposals 
+    '--chain-id=osmosis-1',
+    '--node=https://rpc-osmosis.blockapsis.com',
+    '--gas=1500000',
+    '--gas-prices=0.0025uosmo',
     "-y",
 ]
 
