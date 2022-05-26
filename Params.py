@@ -42,6 +42,9 @@ Minimums = {
     712 : 0.10
 }
 
+Maximums = {
+    1: 0.25
+}
 
 match_limit = 0.30
 adjust_scale = 0.25
