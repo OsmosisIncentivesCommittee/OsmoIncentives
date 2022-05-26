@@ -43,7 +43,7 @@ Minimums = {
 }
 
 Maximums = {
-    1: 0.25
+    1 : 0.25
 }
 
 match_limit = 0.30
