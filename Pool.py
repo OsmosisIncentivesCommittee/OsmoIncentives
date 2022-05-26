@@ -51,7 +51,7 @@ class Pool:
     #translate category share to overall incentives share
     def target_share(self) -> float:
         # match at least the minimum specified for this pool
-        return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())
+        return min(max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()), Params.Maximums.get(self.pid,0))
 
     #Compute the imbbalance as the ratio of the target share as compared to the current share
     #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
