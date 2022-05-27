@@ -84,9 +84,12 @@ class Pool:
     # based on the maturity level of the pool as compared to the entry window
     # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self) -> float:
-        scale_limit_factor = min(1, self.maturity / Params.entry_window)
-        target_factor = max(0, 1 - self.maturity / Params.entry_window)
-        return (self.scale_limited_target() * scale_limit_factor) + (self.target_share() * target_factor)
+        if self.pid in Params.MaturityExceptions:
+            return self.target_share()
+        else:
+            scale_limit_factor = min(1, self.maturity / Params.entry_window)
+            target_factor = max(0, 1 - self.maturity / Params.entry_window)
+            return (self.scale_limited_target() * scale_limit_factor) + (self.target_share() * target_factor)
     def unnorm_adjusted_share(self) -> float:
         return cached_call(self.cache, "unnorm_adjusted_share", self.unnorm_adjusted_share_)
 
