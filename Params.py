@@ -35,12 +35,21 @@ Category_Order = {
 }
 
 Minimums = {
-    1 : 0.25,
-    712 : 0.05,
-    704 : 0.05,
-    674 : 0.05
+    1 : 0.15,
+    9 : 0.03,
+    674 : 0.05,
+    704 : 0.10,
+    712 : 0.10
 }
 
+Maximums = {
+    1 : 0.25
+}
+
+#Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
+MaturityExceptions = [
+    9, 704, 712
+    ]
 
 match_limit = 0.30
 adjust_scale = 0.25
