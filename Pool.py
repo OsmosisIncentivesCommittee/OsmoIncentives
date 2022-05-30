@@ -9,28 +9,28 @@ class Pool:
 
         self.pools = pools
         self.pid = pid
-
+        
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
         self.gauge_ids = Query.load_gauge_ids(pid)
         self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
-
+        
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
         external_gauges = Query.load_external_gauges(self.pid)
-        self.external_per_day = sum([g["daily_value"] for g in external_gauges.values()])
+        self.external_per_day = sum([g["daily_value"] for g in external_gauges.values()])   
 
         self.assets = [a["symbol"] for a in pd]
         self.category = categorize(self.assets)
 
         self.cache : dict[str, Any] = {}
-
+    
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
         return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
 
-    #share of fees collected by this pool relative to category total
+    #share of fees collected by this pool relative to category total    
     def fee_share(self) -> float:
         return self.capped_fees() / self.pools.total_capped_fees(self.category)
 
@@ -47,12 +47,10 @@ class Pool:
     #cap adjusted revenue share at 1+MMC of fee share (currently 2x original share)
     def match_capped_share(self) -> float:
         return min((1+Params.match_multiple_cap)*self.fee_share(), self.adjusted_revenue_share())
-
+    
     #translate category share to overall incentives share
     def target_share(self) -> float:
-        # match at least the minimum and at most the maximum specified for this pool
-        if self.pid in Params.Maximums:
-            return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()))
+        # match at least the minimum specified for this pool
         return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())
 
     #Compute the imbbalance as the ratio of the target share as compared to the current share
@@ -79,17 +77,14 @@ class Pool:
         return self.unnorm_scale_limited_target() * self.pools.scale_limit_renormalization_factor()
     def scale_limited_target(self) -> float:
         return cached_call(self.cache, "scale_limited_target", self.scale_limited_target_)
-
+    
     #Compute the adjusted share, as the linear average of the target share and the scale limited target
     # based on the maturity level of the pool as compared to the entry window
     # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self) -> float:
-        if self.pid in Params.MaturityExceptions:
-            return self.target_share()
-        else:
-            scale_limit_factor = min(1, self.maturity / Params.entry_window)
-            target_factor = max(0, 1 - self.maturity / Params.entry_window)
-            return (self.scale_limited_target() * scale_limit_factor) + (self.target_share() * target_factor)
+        scale_limit_factor = min(1, self.maturity / Params.entry_window)
+        target_factor = max(0, 1 - self.maturity / Params.entry_window)
+        return (self.scale_limited_target() * scale_limit_factor) + (self.target_share() * target_factor)
     def unnorm_adjusted_share(self) -> float:
         return cached_call(self.cache, "unnorm_adjusted_share", self.unnorm_adjusted_share_)
 
