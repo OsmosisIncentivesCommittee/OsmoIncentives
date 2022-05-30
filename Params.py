@@ -48,7 +48,7 @@ Maximums = {
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
-    9, 704, 712
+  
     ]
 
 match_limit = 0.30
