@@ -9,8 +9,8 @@ incentivized_pool_ids = [
 
 matched_pool_ids = [
     3, 497, 498, 553, 555, 560, 562, 571, 572, 573, 574, 577, 578, 592, 600, 601, 604, 605, 606,
-    611, 612, 618, 619, 637, 638, 641, 643, 648, 651
-    ] 
+    611, 612, 618, 619, 637, 638, 641, 643, 648, 651, 719
+    ]
 
 Majors = ["ATOM", "CRO", "axlWETH", "axlWBTC"]
 
@@ -48,7 +48,7 @@ Maximums = {
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
-    9, 704, 712
+  
     ]
 
 match_limit = 0.30
