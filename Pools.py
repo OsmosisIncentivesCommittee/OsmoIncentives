@@ -15,7 +15,6 @@ class Pools:
         all_pools_with_incentives = list(Params.incentivized_pool_ids)
         all_pools_with_incentives.extend(x for x in Params.matched_pool_ids if x not in all_pools_with_incentives)
         self.pools = {pid : Pool(self, pid) for pid in all_pools_with_incentives}
-#        self.pools = {pid : Pool(self, pid) for pid in Params.incentivized_pool_ids + Params.matched_pool_ids}
 
     def get_current_share(self, gids : dict[str, int]):
         return sum([self.gauge_weights.get(gid,0) for gid in gids.values()])/self.total_weight
