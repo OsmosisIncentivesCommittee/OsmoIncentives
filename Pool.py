@@ -36,9 +36,12 @@ class Pool:
 
     #add external $ per day to capped fees to calculate adjusted revenue
     def adjusted_revenue(self) -> int:
-        if self.pid in Params.matched_pool_ids:
-            return self.capped_fees()+self.external_per_day
-        return self.capped_fees()
+        if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
+            return min(self.external_per_day,self.capped_fees())
+        elif self.pid in Params.matched_pool_ids:
+            return self.capped_fees()+min(self.external_per_day,self.capped_fees())
+        else:
+            return self.capped_fees()
 
     #share of adjusted revenue collected by the pool relative to category total
     def adjusted_revenue_share(self) -> float:
