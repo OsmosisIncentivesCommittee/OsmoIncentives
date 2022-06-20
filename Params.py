@@ -17,9 +17,9 @@ matched_pool_ids = [
     719
     ]
 
-Majors = ["ATOM", "CRO", "axlWETH", "axlWBTC"]
+Majors = ["ATOM", "CRO", "WETH", "WBTC"]
 
-Stables = ["EEUR", "axlUSDC", "axlDAI"]
+Stables = ["EEUR", "USDC", "DAI"]
 
 Category_weights = {
     "OSMO_MAJOR" : 0.45,
