@@ -14,6 +14,7 @@ class Pools:
 
         all_pools_with_incentives = list(Params.incentivized_pool_ids)
         all_pools_with_incentives.extend(x for x in Params.matched_pool_ids if x not in all_pools_with_incentives)
+        all_pools_with_incentives.sort()
         self.pools = {pid : Pool(self, pid) for pid in all_pools_with_incentives}
 
     def get_current_share(self, gids : dict[str, int]):
