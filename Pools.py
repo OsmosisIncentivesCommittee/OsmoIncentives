@@ -32,7 +32,7 @@ class Pools:
         return sum([p.capped_fees() for p in self.pools.values() if category=="" or p.category == category])
 
     def avg_fee_apr(self, category : str) -> float:
-        return (52 * self.total_fees(category)) / self.total_liquidity(category)
+        return (365 * self.total_fees(category)) / self.total_liquidity(category)
 
     def total_adjusted_revenue_for(self, category : str) -> int:
         return sum([p.adjusted_revenue() for p in self.pools.values() if category=="" or p.category == category])
