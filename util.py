@@ -63,7 +63,7 @@ def categorize(l : list[str]) -> str:
         if asset in Params.Stables:
             return "STABLESWAP"
     return "OTHERS"
-        
+
 
 
 def based(l : list[str]) -> tuple[str, str]:
@@ -73,14 +73,14 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("OSMO",b)
     elif b == "OSMO":
         return ("OSMO",a)
-    elif a == "UST":
-        return ("UST", b)
-    elif b == "UST":
-        return ("UST", a)
-    elif a == "axlUSDC":
-        return ("axlUSDC",b)
-    elif b == "axlUSDC":
-        return ("axlUSDC",a)
+    elif a == "USDC":
+        return ("USDC",b)
+    elif b == "USDC":
+        return ("USDC",a)
+    elif a == "DAI":
+        return ("DAI",b)
+    elif b == "DAI":
+        return ("DAI",a)
     elif a == "EEUR":
         return ("EEUR", b)
     elif b == "EEUR":
@@ -91,4 +91,3 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("ATOM",a)
     print("assets not based? : ", l)
     return ("","")
-    
