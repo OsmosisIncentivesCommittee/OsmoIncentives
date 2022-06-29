@@ -34,14 +34,28 @@ class Pool:
     def fee_share(self) -> float:
         return self.capped_fees() / self.pools.total_capped_fees(self.category)
 
-    #add external $ per day to capped fees to calculate adjusted revenue
+    #add capped share of external $ per day to capped fees to calculate adjusted revenue
     def adjusted_revenue(self) -> int:
-        if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
-            return min(self.external_per_day,self.capped_fees())
-        elif self.pid in Params.matched_pool_ids:
-            return self.capped_fees()+min(self.external_per_day,self.capped_fees())
+        if "OSMO" in self.category:
+            #Matched but not incentivized
+            if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
+                return min(self.external_per_day,self.capped_fees())
+            #Matched and incentivized
+            elif self.pid in Params.matched_pool_ids:
+                return self.capped_fees()+min(self.external_per_day,self.capped_fees())
+            #Incentivized
+            else:
+                return self.capped_fees()
         else:
-            return self.capped_fees()
+            #Matched but not incentivized
+            if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
+                return min(self.external_per_day*Params.match_multiple_cap_non_osmo,Params.match_fee_cap_non_osmo*self.capped_fees())
+            #Matched and incentivized
+            elif self.pid in Params.matched_pool_ids:
+                return self.capped_fees()+min(self.external_per_day*Params.match_multiple_cap_non_osmo,Params.match_fee_cap_non_osmo*self.capped_fees())
+            #Incentivized
+            else:
+                return self.capped_fees()
 
     #share of adjusted revenue collected by the pool relative to category total
     def adjusted_revenue_share(self) -> float:

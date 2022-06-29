@@ -61,7 +61,9 @@ adjust_scale = 0.25
 entry_window = 4
 
 swap_fee_cap = 3
+match_fee_cap_non_osmo = 0.33
 match_multiple_cap = 1
+match_multiple_cap_non_osmo = 0.5
 
 share_1 = 0.5
 share_7 = 0.3
