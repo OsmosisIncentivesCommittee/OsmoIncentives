@@ -69,8 +69,8 @@ class Pool:
     def target_share(self) -> float:
         # match at least the minimum and at most the maximum specified for this pool
         if self.pid in Params.Maximums:
-            return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()))
-        return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())
+            return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
+        return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share
 
     #Compute the imbbalance as the ratio of the target share as compared to the current share
     #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
