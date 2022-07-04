@@ -13,7 +13,7 @@ matched_pool_ids = [
     3,
     497, 498,
     553, 555, 571, 572, 573, 574, 577,
-    600, 601, 604, 605, 606, 611, 618, 619, 637, 638, 641, 643, 648, 651,
+    600, 601, 604, 605, 606, 611, 618, 619, 637, 638, 641, 643, 648, 651, 690,
     719
     ]
 
@@ -53,7 +53,6 @@ Maximums = {
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
-    690
     ]
 
 match_limit = 0.30
@@ -61,7 +60,9 @@ adjust_scale = 0.25
 entry_window = 4
 
 swap_fee_cap = 3
+match_fee_cap_non_osmo = 0.33
 match_multiple_cap = 1
+match_multiple_cap_non_osmo = 0.5
 
 share_1 = 0.5
 share_7 = 0.3
@@ -69,5 +70,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.01
+community_pool_share = 0.20
 total_incentive_share = 1 - community_pool_share
