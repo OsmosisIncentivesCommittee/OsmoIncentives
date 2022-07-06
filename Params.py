@@ -24,10 +24,10 @@ Stables = ["EEUR", "USDC", "DAI"]
 Category_weights = {
     "OSMO_MAJOR" : 0.45,
     "OSMO_STABLE" : 0.30,
-    "OSMO_MINOR" : 0.20,
+    "OSMO_MINOR" : 0.18,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.05
+    "OTHERS" : 0.04
 }
 
 Category_Order = {
@@ -70,5 +70,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.20
+community_pool_share = 0.23
 total_incentive_share = 1 - community_pool_share
