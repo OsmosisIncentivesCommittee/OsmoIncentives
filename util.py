@@ -89,5 +89,9 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("ATOM",b)
     elif b == "ATOM":
         return ("ATOM",a)
+    elif a == "WETH":
+            return ("WETH",b)
+    elif b == "WETH":
+        return ("WETH",a)
     print("assets not based? : ", l)
     return ("","")

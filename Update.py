@@ -7,12 +7,12 @@ from util import *
 def get_columns(pools : Pools, pool : Pool) -> list[str]:
     cur_share = pools.get_current_share(pool.gauge_ids)
     total_spend = Query.load_total_lp_spend()
-    osmo_apr = 365 * cur_share * total_spend / pool.liquidity
+    osmo_apr = 365 * cur_share * total_spend / max(pool.liquidity,1)
     new_osmo_apr = 365 * pool.adjusted_share() * total_spend / pool.liquidity
-    fee_apr = 365 * pool.fees_collected / pool.liquidity
+    fee_apr = 365 * pool.fees_collected / max(pool.liquidity,1)
     external_apr = 365 * pool.external_per_day / pool.liquidity
     based_assets = based(pool.assets)
-    cur_total = osmo_apr + fee_apr + external_apr
+    cur_total = max(osmo_apr + fee_apr + external_apr,1)
     new_total = new_osmo_apr + fee_apr + external_apr
     return list(map(str, [
         pool.category,
