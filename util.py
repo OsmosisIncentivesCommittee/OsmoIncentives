@@ -85,13 +85,21 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("EEUR", b)
     elif b == "EEUR":
         return ("EEUR", a)
-    elif a == "ATOM":
-        return ("ATOM",b)
-    elif b == "ATOM":
-        return ("ATOM",a)
+    elif a == "USDC.grv":
+        return ("USDC.grv", b)
+    elif b == "USDC.grv":
+        return ("USDC.grv", a)
+    elif a == "DAI.grv":
+        return ("DAI.grv", b)
+    elif b == "DAI.grv":
+        return ("DAI.grv", a)
     elif a == "WETH":
             return ("WETH",b)
     elif b == "WETH":
         return ("WETH",a)
+    elif a == "ATOM":
+        return ("ATOM",b)
+    elif b == "ATOM":
+        return ("ATOM",a)
     print("assets not based? : ", l)
     return ("","")
