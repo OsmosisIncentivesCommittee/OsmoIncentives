@@ -84,7 +84,8 @@ MaturityExceptions = [
     596,
     649,
     631,
-    662
+    662,
+    690
     ]
 
 match_limit = 0.30
