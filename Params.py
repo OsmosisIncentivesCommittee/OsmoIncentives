@@ -6,7 +6,7 @@ incentivized_pool_ids = [
     461, 463, 464, 481, 482, 497, 498,
     548, 549, 553, 555, 557, 558, 571, 572, 573, 574, 577, 584, 585, 586, 587, 596, 597,
     600, 601, 602, 604, 605, 606, 608, 611, 613, 616, 617, 618, 619, 621, 625, 626, 627, 629, 631, 637, 638, 641, 643, 644, 645, 648, 649, 651, 662, 674, 678, 681, 690,
-    704, 712, 722
+    704, 712, 719, 722
     ]
 
 #3, OSMO/AKT, Ends 21st July 2022
@@ -15,15 +15,15 @@ incentivized_pool_ids = [
 #604 and 611 STARS, Ends 7th October 2022
 #648 PSTAKE, Ends 5th August 2022
 #690 MNTL, Ends 16th September 2022
-#719 XPRT, Expired, on for one week to revert to zero as no standard incentives
+#719 XPRT, Expired, on normal incentives for one week to revert to zero
+
 matched_pool_ids = [
     3,
     577,
     600, 601, 
     604, 611,
     648, 
-    690,
-    719
+    690
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC"]
