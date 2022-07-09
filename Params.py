@@ -9,6 +9,7 @@ incentivized_pool_ids = [
     704, 712, 722
     ]
 
+#Tracked 
 matched_pool_ids = [
     3,
     573, 574, 
@@ -70,7 +71,8 @@ Maximums = {
     596 : 0,
     649 : 0,
     631 : 0,
-    662 : 0
+    662 : 0,
+    719 : 0
 }
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
@@ -91,7 +93,8 @@ MaturityExceptions = [
     649,
     631,
     662,
-    690
+    690,
+    719
     ]
 
 match_limit = 0.30
