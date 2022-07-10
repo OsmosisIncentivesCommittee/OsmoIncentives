@@ -57,22 +57,10 @@ Minimums = {
 
 Maximums = {
     1 : 0.25,
-    548 : 0,
-    8 : 0,
-    574 : 0,
-    22 : 0,
-    464 : 0,
-    183 : 0
 }
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
-    548,
-    8,
-    574,
-    22,
-    464,
-    183
     ]
 
 match_limit = 0.30
