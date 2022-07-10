@@ -9,12 +9,20 @@ incentivized_pool_ids = [
     704, 712, 722
     ]
 
+#3, OSMO/AKT, Ends 21st July 2022
+#577 XKI, Ends 13th August 2022
+#600 and 601 CMDX, Ends 10th September 2022
+#604 and 611 STARS, Ends 7th October 2022
+#648 PSTAKE, Ends 5th August 2022
+#690 MNTL, Ends 16th September 2022
+
 matched_pool_ids = [
     3,
-    497, 498,
-    553, 555, 571, 572, 573, 574, 577,
-    600, 601, 604, 605, 606, 611, 618, 619, 637, 638, 641, 643, 648, 651, 690,
-    719
+    577,
+    600, 601, 
+    604, 611,
+    648, 
+    690
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC"]
@@ -24,10 +32,10 @@ Stables = ["EEUR", "USDC", "DAI"]
 Category_weights = {
     "OSMO_MAJOR" : 0.45,
     "OSMO_STABLE" : 0.30,
-    "OSMO_MINOR" : 0.20,
+    "OSMO_MINOR" : 0.16,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.05
+    "OTHERS" : 0.03
 }
 
 Category_Order = {
@@ -49,10 +57,22 @@ Minimums = {
 
 Maximums = {
     1 : 0.25,
+    548 : 0.0000575,
+    8 : 0.0000422,
+    574 : 0.0000225,
+    22 : 0.000055,
+    464 : 0.0000225,
+    183 : 0.000002,
 }
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
+    548,
+    8,
+    574,
+    22,
+    464,
+    183
     ]
 
 match_limit = 0.30
@@ -70,5 +90,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.20
+community_pool_share = 0.26
 total_incentive_share = 1 - community_pool_share
