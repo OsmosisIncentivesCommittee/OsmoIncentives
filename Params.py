@@ -4,9 +4,9 @@ incentivized_pool_ids = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 22, 42,
     183, 197,
     461, 463, 464, 481, 482, 497, 498,
-    548, 549, 553, 555, 557, 558, 571, 572, 573, 574, 577, 584, 585, 586, 587, 596, 597,
-    600, 601, 602, 604, 605, 606, 608, 611, 613, 616, 617, 618, 619, 621, 625, 626, 627, 629, 631, 637, 638, 641, 643, 644, 645, 648, 649, 651, 662, 674, 678, 681, 690,
-    704, 712, 719, 722
+    548, 549, 553, 557, 571, 573, 574, 577, 584, 585, 586,
+    600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
+    704, 712, 722
     ]
 
 #3, OSMO/AKT, Ends 21st July 2022
@@ -15,7 +15,6 @@ incentivized_pool_ids = [
 #604 and 611 STARS, Ends 7th October 2022
 #648 PSTAKE, Ends 5th August 2022
 #690 MNTL, Ends 16th September 2022
-#719 XPRT, Expired, on normal incentives for one week to revert to zero
 
 matched_pool_ids = [
     3,
@@ -33,10 +32,10 @@ Stables = ["EEUR", "USDC", "DAI"]
 Category_weights = {
     "OSMO_MAJOR" : 0.45,
     "OSMO_STABLE" : 0.30,
-    "OSMO_MINOR" : 0.18,
+    "OSMO_MINOR" : 0.16,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.04
+    "OTHERS" : 0.03
 }
 
 Category_Order = {
@@ -58,57 +57,22 @@ Minimums = {
 
 Maximums = {
     1 : 0.25,
-    587 : 0,
-    572 : 0,
-    606 : 0,
-    643 : 0,
-    618 : 0,
-    555 : 0,
-    645 : 0,
-    558 : 0,
-    617 : 0,
-    616 : 0,
-    638 : 0,
-    597 : 0,
-    596 : 0,
-    649 : 0,
-    631 : 0,
-    662 : 0,
-    548 : 0.000115,
-    8 : 0.0000844,
-    574 : 0.000045,
-    22 : 0.00011,
-    464 : 0.000045,
-    183 : 0.000004,
-    719 : 0
+    548 : 0.0000575,
+    8 : 0.0000422,
+    574 : 0.0000225,
+    22 : 0.000055,
+    464 : 0.0000225,
+    183 : 0.000002,
 }
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
-    587,
-    572,
-    606,
-    643,
-    618,
-    555,
-    645,
-    558,
-    617,
-    616,
-    638,
-    597,
-    596,
-    649,
-    631,
-    662,
-    690,
     548,
     8,
     574,
     22,
     464,
-    183,
-    719
+    183
     ]
 
 match_limit = 0.30
@@ -126,5 +90,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.23
+community_pool_share = 0.26
 total_incentive_share = 1 - community_pool_share
