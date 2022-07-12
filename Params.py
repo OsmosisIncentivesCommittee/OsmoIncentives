@@ -62,7 +62,7 @@ Maximums = {
     574 : 0.0000225,
     22 : 0.000055,
     464 : 0.0000225,
-    183 : 0.000002,
+    183 : 0.000002
 }
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
