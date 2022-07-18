@@ -15,6 +15,7 @@ incentivized_pool_ids = [
 #604 and 611 STARS, Ends 7th October 2022
 #648 PSTAKE, Ends 5th August 2022
 #690 MNTL, Ends 16th September 2022
+#15 and #715, XPRT, Ends 22nd August
 
 matched_pool_ids = [
     3,
@@ -22,7 +23,8 @@ matched_pool_ids = [
     600, 601, 
     604, 611,
     648, 
-    690
+    690,
+    15, 719
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC"]
@@ -72,7 +74,9 @@ MaturityExceptions = [
     574,
     22,
     464,
-    183
+    183,
+    15,
+    719
     ]
 
 match_limit = 0.30
