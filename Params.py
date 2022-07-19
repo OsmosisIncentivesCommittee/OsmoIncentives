@@ -9,7 +9,6 @@ incentivized_pool_ids = [
     704, 712, 722
     ]
 
-#3, OSMO/AKT, Ends 21st July 2022
 #577 XKI, Ends 13th August 2022
 #600 and 601 CMDX, Ends 10th September 2022
 #604 and 611 STARS, Ends 7th October 2022
@@ -18,7 +17,6 @@ incentivized_pool_ids = [
 #15 and #715, XPRT, Ends 22nd August
 
 matched_pool_ids = [
-    3,
     577,
     600, 601, 
     604, 611,
