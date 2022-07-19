@@ -15,6 +15,7 @@ incentivized_pool_ids = [
 #648 PSTAKE, Ends 5th August 2022
 #690 MNTL, Ends 16th September 2022
 #15 and #715, XPRT, Ends 22nd August
+#722, EVMOS, ends 18th October 2022
 
 matched_pool_ids = [
     577,
@@ -22,7 +23,8 @@ matched_pool_ids = [
     604, 611,
     648, 
     690,
-    15, 719
+    15, 719,
+    722
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC"]
@@ -72,7 +74,8 @@ MaturityExceptions = [
     574,
     22,
     464,
-    183
+    183,
+    722
     ]
 
 match_limit = 0.30
