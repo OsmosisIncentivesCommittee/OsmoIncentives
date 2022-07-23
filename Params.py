@@ -63,6 +63,12 @@ Maximums = {
 
 #Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
 MaturityExceptions = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 22, 42,
+    183, 197,
+    461, 463, 464, 481, 482, 497, 498,
+    548, 549, 553, 557, 571, 573, 574, 577, 584, 585, 586,
+    600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
+    704, 712, 722
     ]
 
 match_limit = 0.30
