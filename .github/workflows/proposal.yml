@@ -4,7 +4,7 @@ permissions:
 name: MakeProposal
 on:
   schedule:
-    - cron: "0 15 * * 1"
+    - cron: "0 14 * * 1"
 jobs:
   Propose:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
         run: git checkout main
       
       - name: Squash merge staging
-        run: git merge --squash staging #TODO theirs
+        run: git merge --squash staging –allow-unrelated-histories #TODO theirs
       
       - name: Commit main
         run: git commit -m "Merged staging to main" #TODO make this concat of staging commit messages
