@@ -1,5 +1,3 @@
-
-
 incentivized_pool_ids = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 22, 42,
     183, 197,
@@ -67,7 +65,7 @@ Maximums = {
     183 : 0
 }
 
-#Causes Maturity to be ignored, use for 1 proposal only when changing minimums to ensure they are met
+#Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
     548,
     8,
