@@ -47,7 +47,7 @@ jobs:
         run: git checkout main
       
       - name: Squash merge staging
-        run: git merge --squash staging --allow-unrelated-histories #TODO theirs
+        run: git merge --squash staging #TODO theirs
       
       - name: Commit main
         run: git commit -m "Merged staging to main" #TODO make this concat of staging commit messages
