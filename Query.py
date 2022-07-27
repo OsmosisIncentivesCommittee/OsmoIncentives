@@ -31,21 +31,21 @@ def load_total_lp_spend() -> float:
     lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
     return Params.total_incentive_share * daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
 
-#FIXME pagination limits on the gauges query
+#FIXME pagination limits on the gauges query, pagination limit kicked in and hid older gauges, should be fine to return to no pagination in September
 def load_external_gauges(pid : int) -> dict[str, Any]:
     tokens = load_tokens()
     symbols = load_symbols()
-    gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges")["data"]
+    gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges?pagination.limit=25000")["data"]
 
     is_external : Callable[[dict[str, Any]],bool] = lambda g: all([
         g["distribute_to"]["denom"] == "gamm/pool/"+str(pid), # paid to this pool
         not g["is_perpetual"],                                # not perpetual (so this math works)
-        int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]) + 7,   # won't end in the next week   
+        int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]) + 7,   # won't end in the next week
         parse_start_time(g["start_time"]) < days_from_now(7),  # started or starts in next week
         len(g["coins"]) == 1 and g["coins"][0]["denom"].startswith("ibc")
         #single asset + ibc assets only for simplicity of lookup (grouped for short circuit)
     ])
-        
+
 
     external_gauges : dict[str, Any] = {}
     for g in gauges_data:
@@ -59,7 +59,7 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
             price = tokens[symbol]["price"]
             epochs = int(g["num_epochs_paid_over"])
             filled_epochs = int(g["filled_epochs"])
-            
+
             external_gauges[g["id"]] = {
                 "symbol" : symbol,
                 "amount" : amount,
