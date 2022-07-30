@@ -47,13 +47,14 @@ Category_Order = {
     "OTHERS" : 5
 }
 
+#Due to scaling of community pool share, dot was falling below initial liquidity incentive setting, reduce 0.00735 to 0.005 when pool fully established.
 Minimums = {
     1 : 0.15,
     9 : 0.03,
     674 : 0.05,
     704 : 0.10,
     712 : 0.10,
-    773 : 0.005
+    773 : 0.00735
 }
 
 Maximums = {
