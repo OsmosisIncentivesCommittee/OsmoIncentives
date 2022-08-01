@@ -1,10 +1,10 @@
 incentivized_pool_ids = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 22, 42,
-    183, 197,
-    461, 463, 464, 481, 482, 497, 498,
-    548, 549, 553, 557, 571, 573, 574, 577, 584, 585, 586,
+    1, 2, 3, 4, 5, 6, 7, 9, 10, 13, 15, 42,
+    197,
+    461, 463, 481, 482, 497, 498,
+    549, 553, 557, 571, 573, 577, 584, 585, 586,
     600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
-    704, 712, 722, 730
+    704, 712, 722, 725, 730, 731, 773
     ]
 
 #577 XKI, Ends 13th August 2022
@@ -25,7 +25,7 @@ matched_pool_ids = [
     722
     ]
 
-Majors = ["ATOM", "CRO", "WETH", "WBTC"]
+Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
 
 Stables = ["EEUR", "USDC", "DAI"]
 
@@ -47,34 +47,23 @@ Category_Order = {
     "OTHERS" : 5
 }
 
+#Due to scaling of community pool share, dot was falling below initial liquidity incentive setting, reduce 0.00735 to 0.005 when pool fully established.
 Minimums = {
     1 : 0.15,
     9 : 0.03,
     674 : 0.05,
     704 : 0.10,
-    712 : 0.10
+    712 : 0.10,
+    773 : 0.00735
 }
 
 Maximums = {
     1 : 0.25,
-    548 : 0,
-    8 : 0,
-    574 : 0,
-    22 : 0,
-    464 : 0,
-    183 : 0
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    548,
-    8,
-    574,
-    22,
-    464,
-    183,
-    722,
-    730
+    725, 731, 773
     ]
 
 match_limit = 0.30
