@@ -85,5 +85,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.29
+community_pool_share = 0.5
 total_incentive_share = 1 - community_pool_share
