@@ -30,8 +30,8 @@ Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
 Stables = ["EEUR", "USDC", "DAI"]
 
 Category_weights = {
-    "OSMO_MAJOR" : 0.55,
-    "OSMO_STABLE" : 0.25,
+    "OSMO_MAJOR" : 0.65,
+    "OSMO_STABLE" : 0.15,
     "OSMO_MINOR" : 0.19,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
