@@ -30,12 +30,12 @@ Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
 Stables = ["EEUR", "USDC", "DAI"]
 
 Category_weights = {
-    "OSMO_MAJOR" : 0.65,
-    "OSMO_STABLE" : 0.15,
-    "OSMO_MINOR" : 0.19,
+    "OSMO_MAJOR" : 0.60,
+    "OSMO_STABLE" : 0.20,
+    "OSMO_MINOR" : 0.18,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.01
+    "OTHERS" : 0.02
 }
 
 Category_Order = {
@@ -85,5 +85,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.5
+community_pool_share = 0.38
 total_incentive_share = 1 - community_pool_share
