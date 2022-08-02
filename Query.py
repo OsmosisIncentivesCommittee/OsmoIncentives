@@ -1,9 +1,12 @@
 from util import *
 import Params
+import parseDenom
+import parseStaking
 from typing import Any, Callable
 
 IMPERATOR = "https://api-osmosis.imperator.co/"
 BLOCKAPSIS = "https://lcd-osmosis.blockapsis.com/osmosis/"
+CURVE = "https://stats.curve.fi/raw-stats/apys.json"
 
 def load_pool(pid : int):
     return load_json(IMPERATOR+"pools/v2/"+str(pid))
@@ -30,6 +33,13 @@ def load_total_lp_spend() -> float:
     daily_osmo_issuance = float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000
     lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
     return Params.total_incentive_share * daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
+
+
+def load_mintscan_rates():
+    listed_denoms = parseDenom.Parser.parsed_assetlist_by_denom
+    if listed_denoms not in parseStaking.Parser.parsed_rates_by_denom:
+        # TODO: Handle pulling external APRs OR utilizing OSMO APR as last resort.
+        return
 
 #FIXME pagination limits on the gauges query, pagination limit kicked in and hid older gauges, should be fine to return to no pagination in September
 def load_external_gauges(pid : int) -> dict[str, Any]:
