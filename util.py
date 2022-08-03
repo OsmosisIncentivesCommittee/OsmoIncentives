@@ -7,7 +7,6 @@ import Params
 def load_json_(url : str) -> Any:
     return json.loads(urllib.request.urlopen(urllib.request.Request(url)).read().decode('utf-8'))
 
-
 def cached_call(cache : dict[str, Any], key : str, f : Callable[[],Any]):
     r = cache.get(key)
     if r == None:

@@ -7,6 +7,8 @@ from typing import Any, Callable
 IMPERATOR = "https://api-osmosis.imperator.co/"
 BLOCKAPSIS = "https://lcd-osmosis.blockapsis.com/osmosis/"
 CURVE = "https://stats.curve.fi/raw-stats/apys.json"
+ASSETLIST = "https://raw.githubusercontent.com/ToggLeTek/assetlists/main/osmosis-1/osmosis-frontier.assetlist.json"
+MINTSCAN = "https://dashboard-mintscan.s3.ap-northeast-2.amazonaws.com/chains/apr.json"
 
 def load_pool(pid : int):
     return load_json(IMPERATOR+"pools/v2/"+str(pid))

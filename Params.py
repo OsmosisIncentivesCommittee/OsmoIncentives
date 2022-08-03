@@ -1,10 +1,12 @@
+import Query
+
 incentivized_pool_ids = [
-    1, 2, 3, 4, 5, 6, 7, 9, 10, 13, 15, 42,
-    197,
-    461, 463, 481, 482, 497, 498,
-    549, 553, 557, 571, 573, 577, 584, 585, 586,
-    600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
-    704, 712, 722, 725, 730, 731, 773
+    1, #2, 3, 4, 5, 6, 7, 9, 10, 13, 15, 42,
+    #197,
+    #461, 463, 481, 482, 497, 498,
+    #549, 553, 557, 571, 573, 577, 584, 585, 586,
+    #600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
+    #704, 712, 722, 725, 730, 731, 773
     ]
 
 #577 XKI, Ends 13th August 2022
@@ -78,5 +80,11 @@ share_14 = 0.2
 # Accuracy of the weighting split, sufficiently small incentives will not be allocated
 gauge_precision = 100000000
 
-# Share of LP emissions to send to the community pool
-community_pool_share = 1 - total_incentive_share
+# Superfluid enabled pool data - does not enable, just for APR display purposes
+superfluid = {
+    1, 3, 9, 15, 42, 481, 497, 584, 601, 604, 674, 678, 704, 722, 812
+}
+superfluid_discount = 0.5
+
+# Osmosis Staking APR
+#osmo_stake_apr = Query.denom_lookup['uosmo']
