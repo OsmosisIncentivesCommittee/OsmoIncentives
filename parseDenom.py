@@ -1,29 +1,31 @@
 from util import *
 
 
-class Parser:
-    _assetlist_url = "https://raw.githubusercontent.com/ToggLeTek/assetlists/main/osmosis-1/osmosis-frontier.assetlist.json"
-
+class Assets:
+    assetlist_url = "https://raw.githubusercontent.com/ToggLeTek/assetlists/main/osmosis-1/osmosis-frontier.assetlist.json"
+    
     _assetlist: dict
     _parsed_assetlist_by_denom: dict
 
-    async def update(self):
-        async with load_json() as client:
-            req = await client.get(self._assetlist_url)
-
-        if req.status_code != 200:
-            raise Exception("Error parsing assetlist")
-        self._assetlist = req.json()
-
-    async def parse(self):
+    def load_assets():
+        asset_data = load_json(assetlist_url),
         parsed_assetlist_by_denom = {}
-        for asset in self._assetlist['assets']:
+        for asset in asset_data._assetlist['assets']:
             denom = asset['base']
+            symbol = asset['symbol']
+            source_denom = asset['denom_units: ["aliases"]']
+            for exponent in asset['denom_units: ["exponent"']:
+                if symbol.lower() is not asset['denom_units: ["denom"']:
+                    exponent = 0
+                    return asset['denom_units: ["exponent"']
 
             parsed_assetlist_by_denom[denom] = {
-                'denom': denom
+                'denom': denom,
+                'symbol': symbol,
+                'source_denom': source_denom,
+                'exponent': exponent
             }
-        self._parsed_assetlist_by_denom = parsed_assetlist_by_denom
+        asset_data._parsed_assetlist_by_denom = parsed_assetlist_by_denom
 
     @property
     def parsed_assetlist_by_denom(self):
