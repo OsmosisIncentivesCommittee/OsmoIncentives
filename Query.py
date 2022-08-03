@@ -41,6 +41,8 @@ def load_mintscan_rates():
     if listed_denoms not in parseStaking.Parser.parsed_rates_by_denom:
         # TODO: Handle pulling external APRs OR utilizing OSMO APR as last resort.
         return
+        
+#osmo_stake_apr
 
 #FIXME pagination limits on the gauges query, pagination limit kicked in and hid older gauges, should be fine to return to no pagination in September
 def load_external_gauges(pid : int) -> dict[str, Any]:
