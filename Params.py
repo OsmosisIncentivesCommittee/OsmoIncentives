@@ -14,7 +14,6 @@ incentivized_pool_ids = [
 #690 MNTL, Ends 16th September 2022
 #15 and #715, XPRT, Ends 22nd August
 #722, EVMOS, ends 18th October 2022
-
 matched_pool_ids = [
     577,
     600, 601,
@@ -29,16 +28,18 @@ Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
 
 Stables = ["EEUR", "USDC", "DAI"]
 
-Category_weights = {
-    "OSMO_MAJOR" : 0.60,
-    "OSMO_STABLE" : 0.20,
-    "OSMO_MINOR" : 0.18,
+# Bonus APR to give to pools in a category
+Category_premiums = {
+    "OSMO_MAJOR" : 0.05,
+    "OSMO_STABLE" : 0.05,
+    "OSMO_MINOR" : 0.05,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.02
+    "OTHERS" : 0
 }
 
-Category_Order = {
+# Order that categories are displayed on the output, the reverse of this is the order in which incentives are drained if there are insufficient to provide target APRs
+category_order = {
     "OSMO_STABLE" : 0,
     "OSMO_MAJOR" : 1,
     "MAJOR_STABLE" : 2,
@@ -47,43 +48,35 @@ Category_Order = {
     "OTHERS" : 5
 }
 
-Minimums = {
+# Minimum share of LP emissions allocated to a pool to bootstrap liquidity
+minimums = {
     1 : 0.15,
     9 : 0.03,
     674 : 0.05,
     704 : 0.10,
     712 : 0.10,
-    773 : 0.00750
+    773 : 0.005
 }
 
-Maximums = {
-    1 : 0.25,
+# Maximum share of LP emissions available to a pool to prevent over reliance
+maximums = {
+    1 : 0.25
 }
 
-#Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
-MaturityExceptions = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 22, 42,
-    183, 197,
-    461, 463, 464, 481, 482, 497, 498,
-    548, 549, 553, 557, 571, 573, 574, 577, 584, 585, 586,
-    600, 601, 602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
-    704, 712, 722, 725, 730, 731, 773
-    ]
+# Caps a base or asset pair's yield at being twice that of an OSMO pair yield
+match_yield_cap = 2
 
-match_limit = 0.30
-adjust_scale = 0.25
-entry_window = 4
+# Caps external matching program at X times OSMO APR and Lowest yield APR respectively
+match_multiple_cap = 2
+match_multiple_cap_non_osmo = 1
 
-swap_fee_cap = 3
-match_fee_cap_non_osmo = 0.33
-match_multiple_cap = 1
-match_multiple_cap_non_osmo = 0.5
-
+# Determines the share of weighting to 1, 7 and 14 day bonded gauges within internal pools
 share_1 = 0.5
 share_7 = 0.3
 share_14 = 0.2
 
+# Accuracy of the weighting split, sufficiently small incentives will not be allocated
 gauge_precision = 100000000
 
-community_pool_share = 0.38
-total_incentive_share = 1 - community_pool_share
+# Share of LP emissions to send to the community pool
+community_pool_share = 1 - total_incentive_share

@@ -34,7 +34,6 @@ def load_total_lp_spend() -> float:
     lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
     return Params.total_incentive_share * daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
 
-
 def load_mintscan_rates():
     listed_denoms = parseDenom.Parser.parsed_assetlist_by_denom
     if listed_denoms not in parseStaking.Parser.parsed_rates_by_denom:
@@ -55,7 +54,6 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
         len(g["coins"]) == 1 and g["coins"][0]["denom"].startswith("ibc")
         #single asset + ibc assets only for simplicity of lookup (grouped for short circuit)
     ])
-
 
     external_gauges : dict[str, Any] = {}
     for g in gauges_data:

@@ -20,7 +20,7 @@ The data in the main branch is then used to create the on chain adjustment propo
 ## Project Structure
 
 - Params.py - Values set via text proposals, such as parameters (scale limit, matching limit, etc.), incentivized pool IDs and matched externals.
-- Query.py - Functions to get data from Blockapsis and Imperator APIs
+- Query.py - Functions to get data from Blockapsis, Imperator and Curve APIs
 - Pools.py/Pool.py - Methods to do the calculations and generate csvs / proposal data
 - Update.py - Code to update csv files with new data/calculations
 - data/ - csv outputs which are auto imported into [Current Proposal](https://docs.google.com/spreadsheets/d/1ydQfgEDot0AC9xuT2txc39VBfuum_I1gU_1-GrmrWx4/edit?usp=sharing) and [Prospective Proposal](https://docs.google.com/spreadsheets/d/1oEn8JtrIU1mze_3Fw4DbbxWBq6yPUM-yAoaOPxG6Y1k/edit?usp=sharing) spreadsheets and which are used to generate a proposal
