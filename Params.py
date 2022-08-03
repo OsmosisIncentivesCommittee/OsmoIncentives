@@ -1,5 +1,3 @@
-import Query
-
 incentivized_pool_ids = [
     1, #2, 3, 4, 5, 6, 7, 9, 10, 13, 15, 42,
     #197,
@@ -80,11 +78,11 @@ share_14 = 0.2
 # Accuracy of the weighting split, sufficiently small incentives will not be allocated
 gauge_precision = 100000000
 
-# Superfluid enabled pool data - does not enable, just for APR display purposes
+# Chain data - does not enable, just for APR display purposes
 superfluid = {
     1, 3, 9, 15, 42, 481, 497, 584, 601, 604, 674, 678, 704, 722, 812
 }
 superfluid_discount = 0.5
-
-# Osmosis Staking APR
-#osmo_stake_apr = Query.denom_lookup['uosmo']
+yearly_spend = 200000000
+LP_share_emissions = 0.45
+daily_osmo_spend = yearly_spend * LP_share_emissions / 365

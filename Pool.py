@@ -18,8 +18,8 @@ class Pool:
         #FIXME Only does 2 asset pools
         self.pool_ratio = int(pd[0]["liquidity"])/int(pd[1]["liquidity"])/2
 
-        self.base_yield = Query.load_mintscan_rates(self.base_pair) * self.pool_ratio
-        self.asset_yield = Query.load_mintscan_rates(self.asset_pair) * self.pool_ratio
+        # self.base_yield = Query.load_mintscan_rates(self.base_pair) * self.pool_ratio
+        # self.asset_yield = Query.load_mintscan_rates(self.asset_pair) * self.pool_ratio
 
         self.liquidity = int(pd[0]["liquidity"])
 
@@ -51,7 +51,8 @@ class Pool:
     def matched_apr(self) -> float:
         if self.pid in Params.matched_pool_ids:
             if "OSMO" in self.assets:
-                return min(self.external_apr , Params.osmo_stake_apr * Params.match_multiple_cap)
+                # FIXME staking apr hardcoded
+                return min(self.external_apr , 0.28 * Params.match_multiple_cap)
             return min(self.external_apr , (self.base_yield/self.pool_ratio) * Params.match_multiple_cap_non_osmo, (self.asset_yield/(1-self.pool_ratio)) * Params.match_multiple_cap_non_osmo)
 
     # Total APR including all bonuses for display, does assume 100% bonded to 14 day and Superfluid taken if available
@@ -70,8 +71,12 @@ class Pool:
     def target_share(self) -> float:
         # match at least the minimum and at most the maximum specified for this pool
         if self.pid in Params.maximums:
-            return min(Params.maximums.get(self.pid,0),max(Params.minimums.get(self.pid,0), Params.category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
-        return max(Params.minimums.get(self.pid,0), Params.category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share
+            return min(Params.maximums.get(self.pid,0),max(Params.minimums.get(self.pid,0), self.target_spend() / Params.daily_osmo_spend))
+        return max(Params.minimums.get(self.pid,0), self.target_spend() / Params.daily_osmo_spend)
+
+#needs to adjust automatically based on sufficient OSMO
+    def adjusted_share(self) -> float:
+        return self.target_share
 
     # Compute the imbalance as the ratio of the target share as compared to the current share
     #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
