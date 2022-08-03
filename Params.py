@@ -24,12 +24,12 @@ matched_pool_ids = [
     722
     ]
 
-Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
+majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
 
-Stables = ["EEUR", "USDC", "DAI"]
+stables = ["EEUR", "USDC", "DAI"]
 
 # Bonus APR to give to pools in a category
-Category_premiums = {
+category_premiums = {
     "OSMO_MAJOR" : 0.05,
     "OSMO_STABLE" : 0.05,
     "OSMO_MINOR" : 0.05,

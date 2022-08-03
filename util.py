@@ -51,16 +51,16 @@ def read_csv(name : str) -> list[list[str]]:
 def categorize(l : list[str]) -> str:
     (base, asset) = based(l)
     if base == "OSMO":
-        if asset in Params.Stables:
+        if asset in Params.stables:
             return "OSMO_STABLE"
-        if asset in Params.Majors:
+        if asset in Params.majors:
             return "OSMO_MAJOR"
         else:
             return "OSMO_MINOR"
-    elif base in Params.Stables:
-        if asset in Params.Majors:
+    elif base in Params.stables:
+        if asset in Params.majors:
             return "MAJOR_STABLE"
-        if asset in Params.Stables:
+        if asset in Params.stables:
             return "STABLESWAP"
     return "OTHERS"
 
