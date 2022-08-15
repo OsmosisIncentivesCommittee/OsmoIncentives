@@ -3,8 +3,10 @@ import urllib.request
 import datetime
 from typing import Any, Callable
 import Params
+import time
 
 def load_json_(url : str) -> Any:
+    time.sleep(1)
     return json.loads(urllib.request.urlopen(urllib.request.Request(url)).read().decode('utf-8'))
 
 
