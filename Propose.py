@@ -14,7 +14,7 @@ cmd = [
     "update-pool-incentives",
     ",".join(list(new_gauges.keys())),
     ",".join(list(new_gauges.values())),
-    "--deposit=125000000uosmo",
+    "--deposit=400000000uosmo",
     "--from=proposer",
     "--keyring-backend=test",
     '--title="Regular Incentive adjustment for '+ str(datetime.date.today()) +'"',
