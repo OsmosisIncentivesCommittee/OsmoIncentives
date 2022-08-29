@@ -7,17 +7,13 @@ incentivized_pool_ids = [
     704, 712, 722, 725, 730, 731, 773
     ]
 
-#600 and 601 CMDX, Ends 10th September 2022
 #604 and 611 STARS, Ends 7th October 2022
 #690 MNTL, Ends 16th September 2022
-#715, XPRT, Ends 22nd August
 #722, EVMOS, ends 18th October 2022
 
 matched_pool_ids = [
-    600, 601, 
     604, 611,
     690,
-    719,
     722
     ]
 
@@ -55,13 +51,13 @@ Minimums = {
 
 Maximums = {
     1 : 0.25,
-    5: 0.0005,
-    719 : 0,
+    600: 0,
+    601: 0
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    15, 719, 725
+    600, 601, 725
     ]
 
 match_limit = 0.30
