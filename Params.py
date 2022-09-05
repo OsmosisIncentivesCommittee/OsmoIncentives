@@ -8,12 +8,10 @@ incentivized_pool_ids = [
     ]
 
 #604 and 611 STARS, Ends 7th October 2022
-#690 MNTL, Ends 16th September 2022
 #722, EVMOS, ends 18th October 2022
 
 matched_pool_ids = [
     604, 611,
-    690,
     722
     ]
 
@@ -51,10 +49,12 @@ Minimums = {
 
 Maximums = {
     1 : 0.25,
+    690: 0,
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    690
     ]
 
 match_limit = 0.30
