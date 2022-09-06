@@ -4,7 +4,7 @@ incentivized_pool_ids = [
     461, 463, 481, 482, 497, 498,
     549, 553, 557, 571, 573, 577, 584, 585, 586,
     602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681, 690,
-    704, 712, 722, 725, 730, 731, 773
+    704, 712, 722, 725, 730, 731, 773, 795
     ]
 
 #604 and 611 STARS, Ends 7th October 2022
@@ -54,7 +54,7 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    690
+    690, 795
     ]
 
 match_limit = 0.30
