@@ -9,10 +9,12 @@ incentivized_pool_ids = [
 
 #604 and 611 STARS, Ends 7th October 2022
 #722, EVMOS, ends 18th October 2022
+#803, STRD, ends 23rd October 2022
 
 matched_pool_ids = [
     604, 611,
-    722
+    722,
+    803
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
@@ -53,6 +55,7 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    803
     ]
 
 match_limit = 0.30
