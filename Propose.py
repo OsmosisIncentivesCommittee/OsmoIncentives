@@ -17,12 +17,12 @@ cmd = [
     "--deposit=400000000uosmo",
     "--from=proposer",
     "--keyring-backend=test",
-    '--title="Regular Incentive adjustment for '+ str(datetime.date.today()) +'"',
+    "--title=Regular Incentive adjustment for "+ str(datetime.date.today()),
     '--description="' + description + '"',
-    '--chain-id=osmosis-1',
-    '--node=https://rpc-osmosis.blockapsis.com:443',
+    '--chain-id=osmo-test-4',
+    '--node=https://testnet-rpc.osmosis.zone:443',
     '--gas=1500000',
-    '--gas-prices=0.0025uosmo',
+    '--gas-prices=0.025uosmo',
     "-y"
 ]
 
