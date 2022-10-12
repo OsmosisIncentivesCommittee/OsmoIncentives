@@ -42,8 +42,7 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
         not g["is_perpetual"],                                # not perpetual (so this math works)
         int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]) + 7,   # won't end in the next week
         parse_start_time(g["start_time"]) < days_from_now(7),  # started or starts in next week
-        len(g["coins"]) == 1 and g["coins"][0]["denom"].startswith("ibc")
-        #single asset + ibc assets only for simplicity of lookup (grouped for short circuit)
+        len(g["coins"]) == 1
     ])
 
 
