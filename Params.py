@@ -54,7 +54,6 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    806
     ]
 
 match_limit = 0.30
