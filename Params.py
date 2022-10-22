@@ -9,10 +9,15 @@ incentivized_pool_ids = [
 
 #803, StATOM, ended, included to set to 0
 #722, EVMOS, ends 19th January 2023
+#633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 
 matched_pool_ids = [
     722,
     803,
+    625,
+    633,
+    634,
+    818,
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
@@ -54,6 +59,10 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    625,
+    633,
+    634,
+    818,   
     ]
 
 match_limit = 0.30
