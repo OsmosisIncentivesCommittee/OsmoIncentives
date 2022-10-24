@@ -3,11 +3,11 @@ incentivized_pool_ids = [
     197,
     461, 463, 481, 482, 497, 498,
     549, 553, 557, 571, 573, 577, 584, 585, 586,
-    602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 629, 637, 641, 644, 648, 651, 674, 678, 681,
+    602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 637, 641, 644, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 795, 806, 812
     ]
 
-#803, StATOM, ends 23rd October 2022
+#803, StATOM, ended, included to set to 0
 #722, EVMOS, ends 19th January 2023
 
 matched_pool_ids = [
@@ -48,12 +48,13 @@ Minimums = {
 }
 
 Maximums = {
-    1 : 0.25
+    1 : 0.25,
+    803: 0
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    806
+    722
     ]
 
 match_limit = 0.30
