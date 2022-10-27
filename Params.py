@@ -10,6 +10,7 @@ incentivized_pool_ids = [
 #803, StATOM, ended, included to set to 0
 #722, EVMOS, ends 19th January 2023
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
+#553 LIKE, end 11th April 2023
 
 matched_pool_ids = [
     722,
@@ -18,6 +19,7 @@ matched_pool_ids = [
     633,
     634,
     818,
+    553,
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT"]
@@ -64,6 +66,7 @@ MaturityExceptions = [
     634,
     818,
     803,
+    553,
     ]
 
 match_limit = 0.30
