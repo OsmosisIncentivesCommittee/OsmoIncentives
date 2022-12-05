@@ -4,7 +4,7 @@ incentivized_pool_ids = [
     461, 463, 481, 482, 497, 498,
     549, 553, 557, 571, 573, 577, 584, 585, 586,
     602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 637, 641, 644, 648, 651, 674, 678, 681,
-    704, 712, 722, 725, 730, 731, 773, 795, 806, 812, 840
+    704, 712, 722, 725, 730, 731, 773, 795, 806, 812, 833, 840
     ]
 
 #837 IST, ends 6th January 2023
@@ -61,6 +61,7 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    833,
     837
     ]
 
