@@ -27,7 +27,7 @@ class Pool:
             self.category = "OSMO_MAJOR"
         self.cache : dict[str, Any] = {}
 
-        if "Stableswap" in self.category:
+        if "STABLE_STABLE" in self.category:
             return 0
         else:
             self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
@@ -53,8 +53,10 @@ class Pool:
             else:
                 return self.capped_fees()
         else:
+            if "STABLE_STABLE" in self.category:
+                return min(self.external_per_day,self.capped_fees())
             #Matched but not incentivized
-            if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
+            elif self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
                 return min(self.external_per_day*Params.match_multiple_cap_non_osmo,Params.match_fee_cap_non_osmo*self.capped_fees())
             #Matched and incentivized
             elif self.pid in Params.matched_pool_ids:
