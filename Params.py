@@ -33,10 +33,10 @@ Category_weights = {
 
 Category_Order = {
     "OSMO_STABLE" : 0,
-    "OSMO_MAJOR" : 1,
-    "MAJOR_STABLE" : 2,
-    "STABLESWAP" : 3,
-    "OSMO_MINOR" : 4,
+    "STABLESWAP" : 1,
+    "OSMO_MAJOR" : 2,
+    "OSMO_MINOR" : 3,
+    "MAJOR_STABLE" : 4,
     "OTHERS" : 5
 }
 
@@ -59,22 +59,38 @@ MaturityExceptions = [
     722
     ]
 
+#% of Osmo Incentives allowed to be used for External Matching
 match_limit = 0.30
+
+#% that the amount of OSMO incentives a pool receives may change by per week
 adjust_scale = 0.25
+
+#Weeks since token listing that a token may change incentives more than the adjust_scale cap
 entry_window = 4
 
+#Caps the amount of swap fees that can be used to increase the incentives of a pool to X * average swap fee % to prevent excessive volume during the maturing period
 swap_fee_cap = 3
+
+#Requires 3x more fees to generate the same incentive matching in non-OSMO Pools
 match_fee_cap_non_osmo = 0.33
+
+#Caps the matching externals in OSMO pools at X times the native OSMO APR
 match_multiple_cap = 1
+
+#Caps the matching externals in non-OSMO pools at X times the native OSMO APR
 match_multiple_cap_non_osmo = 0.5
 
-#Share of incentives to each bonding period
+#Share of the 1, 7 and 14 day gauges
 share_1 = 0.5
 share_7 = 0.3
 share_14 = 0.2
 
+#How accurate is the OSMO weighting allocation
 gauge_precision = 100000000
 
 #Share of LP incentives that are redirected to the community pool
+#% of LP emissions redirected to community pool
 community_pool_share = 0.70
+
+#Remaining share to split between incentivised pools
 total_incentive_share = 1 - community_pool_share
