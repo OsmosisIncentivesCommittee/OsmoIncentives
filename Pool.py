@@ -13,8 +13,7 @@ class Pool:
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
         self.gauge_ids = Query.load_gauge_ids(pid)
-        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
-
+        
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
@@ -27,6 +26,11 @@ class Pool:
         if self.pid == 789:
             self.category = "OSMO_MAJOR"
         self.cache : dict[str, Any] = {}
+
+        if "Stableswap" in self.category:
+            return 0
+        else:
+            self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
