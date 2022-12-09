@@ -53,10 +53,8 @@ class Pool:
             else:
                 return self.capped_fees()
         else:
-            if "STABLE_STABLE" in self.category:
-                return min(self.external_per_day,self.capped_fees())
             #Matched but not incentivized
-            elif self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
+            if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
                 return min(self.external_per_day*Params.match_multiple_cap_non_osmo,Params.match_fee_cap_non_osmo*self.capped_fees())
             #Matched and incentivized
             elif self.pid in Params.matched_pool_ids:
@@ -76,7 +74,9 @@ class Pool:
     #translate category share to overall incentives share
     def target_share(self) -> float:
         # match at least the minimum and at most the maximum specified for this pool
-        if self.pid in Params.Maximums:
+        if "STABLE_STABLE" in self.category:
+            return min(self.external_per_day,self.fees_collected()*2)/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)
+        elif self.pid in Params.Maximums:
             return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
         return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share
 
