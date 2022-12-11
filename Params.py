@@ -11,6 +11,8 @@ incentivized_pool_ids = [
 #722, EVMOS, ends 19th January 2023
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 #553 LIKE, end 11th April 2023
+#604 STARS, end 12th March 2023
+#611 STARS, end 31st January 2023
 
 matched_pool_ids = [
     722,
@@ -20,6 +22,8 @@ matched_pool_ids = [
     818,
     553,
     837,
+    604,
+    611
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB"]
