@@ -11,6 +11,8 @@ incentivized_pool_ids = [
 #722, EVMOS, ends 19th January 2023
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 #553 LIKE, end 11th April 2023
+#604 STARS, end 12th March 2023
+#611 STARS, end 31st January 2023
 
 matched_pool_ids = [
     722,
@@ -20,6 +22,8 @@ matched_pool_ids = [
     818,
     553,
     837,
+    604,
+    611
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB"]
@@ -56,13 +60,37 @@ Minimums = {
 }
 
 Maximums = {
-    1 : 0.25
+    1 : 0.25,
+    549 : 0,
+    637 : 0,
+    557 : 0.000003985,
+    621 : 0.000007405,
+    553 : 0.000054405,
+    461 : 0.000016185,
+    613 : 0.000007365,
+    197 : 0.000020515,
+    619 : 0.00002427,
+    644 : 0.00002285,
+    571 : 0.00003265,
+    6 : 0.000056385
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    833,
-    837
+    604,
+    611,
+    549,
+    637,
+    557,
+    621,
+    553,
+    461,
+    613,
+    197,
+    619,
+    644,
+    571,
+    6 
     ]
 
 match_limit = 0.30

@@ -29,7 +29,7 @@ def load_symbols() -> dict[str, str]:
 def load_total_lp_spend() -> float:
     daily_osmo_issuance = float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000
     lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
-    return Params.total_incentive_share * daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
+    return daily_osmo_issuance * lp_mint_proportion * load_tokens()["OSMO"]["price"]
 
 #FIXME pagination limits on the gauges query, pagination limit kicked in and hid older gauges, should be fine to return to no pagination in September
 def load_external_gauges(pid : int) -> dict[str, Any]:
