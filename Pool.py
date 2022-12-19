@@ -24,7 +24,7 @@ class Pool:
         self.assets = [a["symbol"] for a in pd]
         self.category = categorize(self.assets)
         #workaround for WBNB not on info site yet
-        if self.pid == 840:
+        if self.pid == 789:
             self.category = "OSMO_MAJOR"
         self.cache : dict[str, Any] = {}
 
