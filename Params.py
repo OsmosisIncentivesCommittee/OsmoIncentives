@@ -1,10 +1,9 @@
 incentivized_pool_ids = [
-    1, 2, 3, 4, 5, 6, 7, 9, 10, 13, 15, 42,
-    197,
-    461, 463, 481, 482, 497, 498,
-    557, 571, 573, 577, 584, 585, 586,
-    602, 604, 605, 608, 611, 613, 619, 621, 625, 626, 627, 641, 644, 648, 651, 674, 678, 681,
-    704, 712, 722, 725, 730, 731, 773, 795, 806, 812, 833, 840
+    1, 2, 3, 4, 5, 7, 9, 10, 13, 15, 42,
+    463, 481, 482, 497, 498,
+    573, 577, 584, 585, 586,
+    602, 604, 605, 608, 611, 625, 626, 627, 641, 648, 651, 674, 678, 681,
+    704, 712, 722, 725, 730, 731, 773, 789, 795, 806, 812, 833, 840
     ]
 
 #837 IST, ends 6th January 2023
@@ -12,7 +11,6 @@ incentivized_pool_ids = [
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 #553 LIKE, end 11th April 2023
 #604 STARS, end 12th March 2023
-#611 STARS, end 31st January 2023
 
 matched_pool_ids = [
     722,
@@ -22,21 +20,20 @@ matched_pool_ids = [
     818,
     553,
     837,
-    604,
-    611
+    604
     ]
 
-Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB"]
+Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC"]
 
 Stables = ["EEUR", "USDC", "DAI"]
 
 Category_weights = {
-    "OSMO_MAJOR" : 0.45,
-    "OSMO_STABLE" : 0.30,
-    "OSMO_MINOR" : 0.14,
+    "OSMO_MAJOR" : 0.54,
+    "OSMO_STABLE" : 0.17,
+    "OSMO_MINOR" : 0.25,
     "MAJOR_STABLE" : 0,
     "STABLESWAP" : 0,
-    "OTHERS" : 0.02
+    "OTHERS" : 0
 }
 
 Category_Order = {
@@ -48,41 +45,44 @@ Category_Order = {
     "OTHERS" : 5
 }
 
-#Due to scaling of community pool share, dot was falling below initial liquidity incentive setting, reduce 0.00735 to 0.005 when pool fully established.
+#789, MATIC, Last Proposal dated 9th January 2023 then remove
 Minimums = {
-    1 : 0.15,
-    9 : 0.03,
-    674 : 0.05,
+    9 : 0.02,
+    481 : 0.005,
+    674 : 0.035,
     704 : 0.10,
-    712 : 0.10,
-    773 : 0.005
+    712 : 0.085,
+    773 : 0.005,
+    789 : 0.005,
+    498 : 0.0042795,
+    611 : 0.0027305,
+    585 : 0.0034676,
+    4 : 0.0016224,
+    10 : 0.0011787,
+    13 : 0.0007793,
 }
 
 Maximums = {
-    1 : 0.25,
-    557 : 0,
-    621 : 0,
-    461 : 0,
-    613 : 0,
-    197 : 0,
-    619 : 0,
-    644 : 0,
-    571 : 0,
-    6 : 0
+    1 : 0.35,
+    678 : 0.13,
+    498 : 0.0042795,
+    611 : 0.0027305,
+    585 : 0.0034676,
+    4 : 0.0016224,
+    10 : 0.0011787,
+    13 : 0.0007793,
+    482 : 0
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    557,
-    621,
-    553,
-    461,
-    613,
-    197,
-    619,
-    644,
-    571,
-    6 
+    498,
+    611,
+    585,
+    4,
+    10,
+    13,
+    482
     ]
 
 match_limit = 0.30
@@ -100,5 +100,5 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
-community_pool_share = 0.50
+community_pool_share = 0.70
 total_incentive_share = 1 - community_pool_share
