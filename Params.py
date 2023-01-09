@@ -79,5 +79,6 @@ share_14 = 0.2
 
 gauge_precision = 100000000
 
+#Share of LP incentives that are redirected to the community pool
 community_pool_share = 0.70
 total_incentive_share = 1 - community_pool_share
