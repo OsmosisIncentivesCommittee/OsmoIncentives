@@ -47,7 +47,7 @@ jobs:
         run: git checkout main
       
       - name: Squash merge staging
-        run: git merge staging --squash staging --allow-unrelated-histories
+        run: git merge staging --squash --allow-unrelated-histories
       
       - name: Commit main
         run: git commit -m "Merged staging to main"
