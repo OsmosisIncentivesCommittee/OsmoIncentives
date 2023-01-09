@@ -73,6 +73,7 @@ match_fee_cap_non_osmo = 0.33
 match_multiple_cap = 1
 match_multiple_cap_non_osmo = 0.5
 
+#Share of incentives to each bonding period
 share_1 = 0.5
 share_7 = 0.3
 share_14 = 0.2
