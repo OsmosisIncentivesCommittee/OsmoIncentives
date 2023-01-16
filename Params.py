@@ -2,16 +2,14 @@ incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
     463, 481, 497, 573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
-    704, 712, 722, 725, 730, 731, 773, 789, 795, 806, 812, 833, 837, 840
+    704, 712, 722, 725, 730, 731, 773, 789, 795, 806, 812, 833, 840
     ]
 
-#722, EVMOS, ends 19th January 2023
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 #553 LIKE, end 11th April 2023
 #604 STARS, end 12th March 2023
 
 matched_pool_ids = [
-    722,
     625,
     633,
     634,
@@ -42,26 +40,23 @@ Category_Order = {
     "OTHERS" : 5
 }
 
-#789, MATIC, Last Proposal dated 9th January 2023 then remove
 Minimums = {
     9 : 0.02,
     481 : 0.005,
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
-    773 : 0.005,
-    789 : 0.005
+    773 : 0.005
 }
 
 Maximums = {
     1 : 0.35,
-    678 : 0.13,
-    837 : 0
+    678 : 0.13
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    837
+    722
     ]
 
 match_limit = 0.30
