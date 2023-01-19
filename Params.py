@@ -33,9 +33,7 @@ Category_Order = {
     "OSMO_STABLE" : 0,
     "STABLE_STABLE" : 1,
     "OSMO_MAJOR" : 2,
-    "OSMO_MINOR" : 3,
-    "MAJOR_STABLE" : 4,
-    "OTHERS" : 5
+    "OSMO_MINOR" : 3
 }
 
 Minimums = {
