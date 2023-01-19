@@ -52,7 +52,6 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    722
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
