@@ -2,7 +2,7 @@ incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
     463, 481, 497, 573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
-    704, 712, 722, 725, 730, 731, 773, 789, 795, 806, 812, 833, 840
+    704, 712, 722, 725, 730, 731, 773, 789, 795, 806, 812, 833, 840, 877
     ]
 
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
@@ -20,7 +20,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC"]
 
-Stables = ["EEUR", "USDC", "DAI"]
+Stables = ["USDC", "DAI", "BUSD", "USDT"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
@@ -47,11 +47,13 @@ Minimums = {
 
 Maximums = {
     1 : 0.35,
-    678 : 0.13
+    678 : 0.13,
+    481: 0.006
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    481
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
@@ -76,14 +78,13 @@ match_multiple_cap = 1
 match_multiple_cap_non_osmo = 0.5
 
 #Share of the 1, 7 and 14 day gauges
-share_1 = 0.5
-share_7 = 0.3
-share_14 = 0.2
+share_1 = 0
+share_7 = 0
+share_14 = 1
 
 #How accurate is the OSMO weighting allocation
 gauge_precision = 100000000
 
-#Share of LP incentives that are redirected to the community pool
 #% of LP emissions redirected to community pool
 community_pool_share = 0.70
 
