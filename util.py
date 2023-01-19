@@ -50,6 +50,7 @@ def read_csv(name : str) -> list[list[str]]:
     with open(name, "r") as f:
         return [x.strip().split(",") for x in f.readlines()]
 
+#Sorts pools into categories based on their constituent assets
 def categorize(l : list[str]) -> str:
     (base, asset) = based(l)
     if base == "OSMO":
@@ -60,17 +61,16 @@ def categorize(l : list[str]) -> str:
         else:
             return "OSMO_MINOR"
     elif base in Params.Stables:
-        if asset in Params.Majors:
-            return "MAJOR_STABLE"
-        if asset in Params.Stables:
-            return "STABLESWAP"
-    return "OTHERS"
+        return "STABLE_STABLE"
 
-
-
-def based(l : list[str]) -> tuple[str, str]:
+#Defines what the base pair of the pool is for display and categorisation purposes
+def based(l : list[str]) -> tuple[str, str, str]:
     a = l[0]
     b = l[1]
+    try:
+        c = l[2]
+    except IndexError:
+        c = "None"
     if a == "OSMO":
         return ("OSMO",b)
     elif b == "OSMO":
@@ -79,14 +79,20 @@ def based(l : list[str]) -> tuple[str, str]:
         return ("USDC",b)
     elif b == "USDC":
         return ("USDC",a)
+    elif c == "USDC":
+        return ("USDC", "3pool")
+    elif a == "BUSD":
+        return ("BUSD",b)
+    elif b == "BUSD":
+        return ("BUSD",a)
+    elif a == "USDT":
+        return ("USDT",b)
+    elif b == "USDT":
+        return ("USDT",a)
     elif a == "DAI":
         return ("DAI",b)
     elif b == "DAI":
         return ("DAI",a)
-    elif a == "EEUR":
-        return ("EEUR", b)
-    elif b == "EEUR":
-        return ("EEUR", a)
     elif a == "ATOM":
         return ("ATOM",b)
     elif b == "ATOM":
