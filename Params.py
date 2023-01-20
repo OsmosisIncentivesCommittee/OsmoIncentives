@@ -49,7 +49,7 @@ Minimums = {
 Maximums = {
     1 : 0.35,
     678 : 0.13,
-    481: 0.006
+    481: 0.0026
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
