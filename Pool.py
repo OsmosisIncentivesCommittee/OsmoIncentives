@@ -33,7 +33,10 @@ class Pool:
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
-        return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
+        if "STABLE_STABLE" in self.category:
+            return self.fees_collected
+        else:
+            return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
 
     #share of fees collected by this pool relative to category total
     def fee_share(self) -> float:
