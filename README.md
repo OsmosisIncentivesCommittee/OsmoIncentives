@@ -24,7 +24,7 @@ The data in the main branch is then used to create the on chain adjustment propo
 - Pools.py/Pool.py - Methods to do the calculations and generate csvs / proposal data
 - Update.py - Code to update csv files with new data/calculations
 - data/ - csv outputs which are auto imported into [Current Proposal](https://docs.google.com/spreadsheets/d/1ydQfgEDot0AC9xuT2txc39VBfuum_I1gU_1-GrmrWx4/edit?usp=sharing) and [Prospective Proposal](https://docs.google.com/spreadsheets/d/1oEn8JtrIU1mze_3Fw4DbbxWBq6yPUM-yAoaOPxG6Y1k/edit?usp=sharing) spreadsheets and which are used to generate a proposal
-- Propose.py - Takes `data/new_gauges.csv` and generates and submits an onchain poolincentives proposal
+- Propose.py - Takes `data/new_gauges.csv` and generates and submits an onchain poolincentives proposal from address: osmo1ahtwxyl7v5qu347u07lwxxkz4dpxpl48yr4une
 
 ## Current Incentives Calculation
 
