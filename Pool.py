@@ -13,8 +13,7 @@ class Pool:
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
         self.gauge_ids = Query.load_gauge_ids(pid)
-        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
-
+        
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
@@ -23,14 +22,21 @@ class Pool:
 
         self.assets = [a["symbol"] for a in pd]
         self.category = categorize(self.assets)
-        #workaround for WBNB not on info site yet
-        if self.pid == 789:
-            self.category = "OSMO_MAJOR"
+        
         self.cache : dict[str, Any] = {}
+
+        #StableSwap Incentives are not affected by Maturity, otherwise maturity is weeks since listing on info site
+        if "STABLE_STABLE" in self.category:
+            self.maturity = 0
+        else:
+            self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
-        return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
+        if "STABLE_STABLE" in self.category:
+            return self.fees_collected
+        else:
+            return min(self.fees_collected, Params.swap_fee_cap * self.pools.avg_fee_apr(self.category) * self.liquidity)
 
     #share of fees collected by this pool relative to category total
     def fee_share(self) -> float:
@@ -70,12 +76,14 @@ class Pool:
     #translate category share to overall incentives share
     def target_share(self) -> float:
         # match at least the minimum and at most the maximum specified for this pool
-        if self.pid in Params.Maximums:
+        if "STABLE_STABLE" in self.category:
+            return self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)
+        elif self.pid in Params.Maximums:
             return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
         return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share
 
-    #Compute the imbbalance as the ratio of the target share as compared to the current share
-    #   with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
+    #Compute the imbalance as the ratio of the target share as compared to the current share
+    #with 0 current share being mapped to an imbalance of 0%, to avoid division by zero
     def imbalance_(self) -> float:
         cs = self.pools.get_current_share(self.gauge_ids)
         if cs > 0:
@@ -104,6 +112,8 @@ class Pool:
     # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self) -> float:
         if self.pid in Params.MaturityExceptions:
+            return self.target_share()
+        elif "STABLE_STABLE" in self.category:
             return self.target_share()
         else:
             scale_limit_factor = min(1, self.maturity / Params.entry_window)
