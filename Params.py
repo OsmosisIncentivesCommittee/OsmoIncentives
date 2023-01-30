@@ -3,7 +3,7 @@ incentivized_pool_ids = [
     463, 481, 497, 573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 833, 840, 877
+    806, 812, 833, 840, 877, 899
     ]
 
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
@@ -19,7 +19,7 @@ matched_pool_ids = [
     604
     ]
 
-Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC"]
+Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX"]
 
 Stables = ["EEUR", "USDC", "DAI", "BUSD", "USDT"]
 
@@ -43,18 +43,20 @@ Minimums = {
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
-    773 : 0.005
+    773 : 0.005,
+    899 : 0.005
 }
 
 Maximums = {
     1 : 0.35,
     678 : 0.13,
-    481: 0.0026
+    481: 0
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    481
+    481,
+    899
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
