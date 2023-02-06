@@ -1,6 +1,7 @@
 incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
-    463, 481, 497, 573, 577, 584, 586,
+    463, 497, 
+    573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     806, 812, 833, 840, 877, 899
@@ -21,7 +22,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX"]
 
-Stables = ["EEUR", "USDC", "DAI", "BUSD", "USDT"]
+Stables = ["USDC", "DAI", "BUSD", "USDT"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
@@ -49,13 +50,11 @@ Minimums = {
 
 Maximums = {
     1 : 0.35,
-    678 : 0.13,
-    481: 0
+    678 : 0.13
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    481,
     899
     ]
 
