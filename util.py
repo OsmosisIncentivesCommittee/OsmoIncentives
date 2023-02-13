@@ -62,6 +62,8 @@ def categorize(l : list[str]) -> str:
             return "OSMO_MINOR"
     elif base in Params.Stables:
         return "STABLE_STABLE"
+    else:
+        return "NO_CATEGORY_MATCHED"
 
 #Defines what the base pair of the pool is for display and categorisation purposes
 def based(l : list[str]) -> tuple[str, str, str]:
