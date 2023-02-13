@@ -75,9 +75,11 @@ class Pool:
 
     #translate category share to overall incentives share
     def target_share(self) -> float:
-        # match at least the minimum and at most the maximum specified for this pool
+        #TODO Enable maximums
         if "STABLE_STABLE" in self.category:
-            return self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)
+            return max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+        elif "NO_CATEGORY_MATCHED" in self.category:
+            return max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
         elif self.pid in Params.Maximums:
             return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
         return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share

@@ -17,7 +17,8 @@ matched_pool_ids = [
     634,
     818,
     553,
-    604
+    604,
+    886
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX"]
@@ -28,14 +29,16 @@ Category_weights = {
     "OSMO_STABLE" : 0.17,
     "STABLE_STABLE" : 0.04,
     "OSMO_MAJOR" : 0.54,
-    "OSMO_MINOR" : 0.25
+    "OSMO_MINOR" : 0.25,
+    "NO_CATEGORY_MATCHED" : 0.01
 }
 
 Category_Order = {
     "OSMO_STABLE" : 0,
     "STABLE_STABLE" : 1,
     "OSMO_MAJOR" : 2,
-    "OSMO_MINOR" : 3
+    "OSMO_MINOR" : 3,
+    "NO_CATEGORY_MATCHED" : 4.
 }
 
 Minimums = {
@@ -55,7 +58,8 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    899
+    886,
+    899,
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
