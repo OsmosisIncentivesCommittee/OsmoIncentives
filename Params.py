@@ -4,7 +4,7 @@ incentivized_pool_ids = [
     573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 833, 840, 877, 899
+    806, 812, 833, 840, 877, 879, 899
     ]
 
 #633, #818, #625, #634, Gravity pools, end approx February 21st 2023
@@ -41,6 +41,8 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 4.
 }
 
+# 899 until the Proposal on the 27th February
+# 879 until the Proposal on the 13th March
 Minimums = {
     9 : 0.02,
     481 : 0.005,
@@ -48,7 +50,8 @@ Minimums = {
     704 : 0.10,
     712 : 0.085,
     773 : 0.005,
-    899 : 0.005
+    899 : 0.005,
+    879 : 0.005
 }
 
 Maximums = {
@@ -59,6 +62,7 @@ Maximums = {
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
     886,
+    879,
     899,
     ]
 
