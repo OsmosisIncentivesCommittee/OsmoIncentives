@@ -4,18 +4,15 @@ incentivized_pool_ids = [
     573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 833, 840, 877, 879, 899, 900
+    806, 812, 833, 837, 840, 877, 879, 899, 
+    900, 908
     ]
 
-#633, #818, #625, #634, Gravity pools, end approx February 21st 2023
 #553 LIKE, end 11th April 2023
 #604 STARS, end 12th March 2023
+#886 stkATOM, end 17th March 2023
 
 matched_pool_ids = [
-    625,
-    633,
-    634,
-    818,
     553,
     604,
     886
@@ -23,7 +20,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
 
-Stables = ["USDC", "DAI", "BUSD", "USDT"]
+Stables = ["USDC", "DAI", "BUSD", "USDT", "IST", "CMST"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
@@ -41,8 +38,8 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 4.
 }
 
-# 899 until the Proposal on the 27th February
 # 879 until the Proposal on the 13th March
+# 900 until the Proposal on the 20th March
 Minimums = {
     9 : 0.02,
     481 : 0.005,
@@ -50,8 +47,6 @@ Minimums = {
     704 : 0.10,
     712 : 0.085,
     773 : 0.005,
-    899 : 0.005,
-    879 : 0.005,
     900 : 0.005
 }
 
@@ -62,10 +57,8 @@ Maximums = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    625,
-    633,
-    634,
-    818,
+    837,
+    879,
     900
     ]
 

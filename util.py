@@ -92,9 +92,13 @@ def based(l : list[str]) -> tuple[str, str, str]:
     elif b == "USDT":
         return ("USDT",a)
     elif a == "DAI":
+        if c == "IST":
+            return ("DAI","3pool")
         return ("DAI",b)
     elif b == "DAI":
         return ("DAI",a)
+    elif c == "DAI":
+        return ("DAI", "3pool")
     elif a == "ATOM":
         return ("ATOM",b)
     elif b == "ATOM":
