@@ -77,9 +77,17 @@ class Pool:
     def target_share(self) -> float:
         #TODO Enable maximums
         if "STABLE_STABLE" in self.category:
-            return max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+            if self.pid in Params.Maximums:
+                return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
+            else:
+                return max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
         elif "NO_CATEGORY_MATCHED" in self.category:
-            return max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+            if self.pid in Params.Maximums:
+                return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
+            else:
+                return max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+        elif "COMPOSABILITY" in self.category:
+            return Params.Fixed.get(self.pid,0)
         elif self.pid in Params.Maximums:
             return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share())) * Params.total_incentive_share
         return max(Params.Minimums.get(self.pid,0), Params.Category_weights[self.category] * self.match_capped_share()) * Params.total_incentive_share
@@ -124,7 +132,7 @@ class Pool:
     def unnorm_adjusted_share(self) -> float:
         return cached_call(self.cache, "unnorm_adjusted_share", self.unnorm_adjusted_share_)
 
-    #Then we apply a final renormalization so that again the total of all adjsuted shares is 99%
+    #Then we apply a final renormalization so that again the total of all adjusted shares is the same as the current emissions to LPs
     def adjusted_share_(self) -> float:
         return self.unnorm_adjusted_share() * self.pools.adjustment_renormalization_factor()
     def adjusted_share(self) -> float:

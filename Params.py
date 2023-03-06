@@ -4,17 +4,15 @@ incentivized_pool_ids = [
     573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 833, 837, 840, 877, 879, 899, 
-    900, 908
+    806, 812, 833, 837, 840, 872, 873, 877, 879, 899, 
+    900, 907, 908, 938
     ]
 
 #553 LIKE, end 11th April 2023
-#604 STARS, end 12th March 2023
 #886 stkATOM, end 17th March 2023
 
 matched_pool_ids = [
     553,
-    604,
     886
     ]
 
@@ -27,6 +25,7 @@ Category_weights = {
     "STABLE_STABLE" : 0.04,
     "OSMO_MAJOR" : 0.54,
     "OSMO_MINOR" : 0.25,
+    "COMPOSABILITY" : 0.00074,
     "NO_CATEGORY_MATCHED" : 0.01
 }
 
@@ -35,7 +34,8 @@ Category_Order = {
     "STABLE_STABLE" : 1,
     "OSMO_MAJOR" : 2,
     "OSMO_MINOR" : 3,
-    "NO_CATEGORY_MATCHED" : 4.
+    "COMPOSABILITY" : 4,
+    "NO_CATEGORY_MATCHED" : 5.
 }
 
 # 879 until the Proposal on the 13th March
@@ -52,14 +52,24 @@ Minimums = {
 
 Maximums = {
     1 : 0.35,
-    678 : 0.13
+    678 : 0.13,
+    877 : 0,
+    879 : 0,
+    463 : 0
+}
+
+Fixed = {
+    872 : 0.0000632,
+    873 : 0.0000632,
+    938 : 0.0000948
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    837,
     879,
-    900
+    463,
+    907,
+    604
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
