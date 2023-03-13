@@ -60,7 +60,7 @@ def categorize(l : list[str]) -> str:
             return "OSMO_MAJOR"
         else:
             return "OSMO_MINOR"
-    elif base[0:3] == asset[0:3]:
+    elif base[:4] == asset[:4]:
         return "COMPOSABILITY"
     # Workaround for listing USDC/USDC/USDC with low liquidity. May cause issues if normal pools got incentivised below $5k liquidity
     elif asset == "":

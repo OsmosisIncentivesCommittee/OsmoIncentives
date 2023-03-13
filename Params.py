@@ -1,11 +1,11 @@
 incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
-    463, 497, 
+    497, 
     573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 833, 837, 840, 872, 873, 877, 879, 899, 
-    900, 907, 908, 938
+    806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
+    900, 907, 908, 938, 939
     ]
 
 #553 LIKE, end 11th April 2023
@@ -18,7 +18,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
 
-Stables = ["USDC", "DAI", "BUSD", "USDT", "IST", "CMST"]
+Stables = ["USDC", "DAI", "USDT", "IST", "CMST"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
@@ -26,7 +26,7 @@ Category_weights = {
     "OSMO_MAJOR" : 0.54,
     "OSMO_MINOR" : 0.25,
     "COMPOSABILITY" : 0.00074,
-    "NO_CATEGORY_MATCHED" : 0.01
+    "NO_CATEGORY_MATCHED" : 0
 }
 
 Category_Order = {
@@ -38,8 +38,8 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 5.
 }
 
-# 879 until the Proposal on the 13th March
 # 900 until the Proposal on the 20th March
+# 939 until the Proposal on the 3rd April
 Minimums = {
     9 : 0.02,
     481 : 0.005,
@@ -47,15 +47,15 @@ Minimums = {
     704 : 0.10,
     712 : 0.085,
     773 : 0.005,
-    900 : 0.005
+    831 : 0.005,
+    900 : 0.005,
+    939 : 0.00182
 }
 
 Maximums = {
     1 : 0.35,
     678 : 0.13,
-    877 : 0,
-    879 : 0,
-    463 : 0
+    886 : 0
 }
 
 Fixed = {
@@ -66,10 +66,9 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    879,
-    463,
-    907,
-    604
+    831,
+    857,
+    886
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching

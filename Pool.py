@@ -78,14 +78,14 @@ class Pool:
         #TODO Enable maximums
         if "STABLE_STABLE" in self.category:
             if self.pid in Params.Maximums:
-                return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
+                return min(Params.Maximums.get(self.pid,0) * Params.total_incentive_share,max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
             else:
-                return max(Params.Minimums.get(self.pid,0), self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+                return max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.fees_collected*2/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
         elif "NO_CATEGORY_MATCHED" in self.category:
             if self.pid in Params.Maximums:
-                return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
+                return min(Params.Maximums.get(self.pid,0) * Params.total_incentive_share,max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
             else:
-                return max(Params.Minimums.get(self.pid,0), self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+                return max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
         elif "COMPOSABILITY" in self.category:
             return Params.Fixed.get(self.pid,0)
         elif self.pid in Params.Maximums:

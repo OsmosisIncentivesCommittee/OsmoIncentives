@@ -35,7 +35,7 @@ class Pools:
         return (365 * self.total_fees(category)) / self.total_liquidity(category)
 
     def total_adjusted_revenue_for(self, category : str) -> int:
-        return sum([p.adjusted_revenue() for p in self.pools.values() if category=="" or p.category == category])
+        return max(sum([p.adjusted_revenue() for p in self.pools.values() if category=="" or p.category == category]),1)
 
     def scale_limit_renormalization_factor(self) -> float:
         return cached_call(self.cache, "scale_limit_renormalization_factor", lambda:
