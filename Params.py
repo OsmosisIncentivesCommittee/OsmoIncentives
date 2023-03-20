@@ -9,11 +9,8 @@ incentivized_pool_ids = [
     ]
 
 #553 LIKE, end 11th April 2023
-#886 stkATOM, end 17th March 2023
-
 matched_pool_ids = [
-    553,
-    886
+    553
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
@@ -38,8 +35,8 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 5.
 }
 
-# 900 until the Proposal on the 20th March
 # 939 until the Proposal on the 3rd April
+# 831 until the Proposal on the 10th April
 Minimums = {
     9 : 0.02,
     481 : 0.005,
@@ -48,14 +45,12 @@ Minimums = {
     712 : 0.085,
     773 : 0.005,
     831 : 0.005,
-    900 : 0.005,
     939 : 0.00182
 }
 
 Maximums = {
     1 : 0.35,
-    678 : 0.13,
-    886 : 0
+    678 : 0.13
 }
 
 Fixed = {
@@ -66,9 +61,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    831,
     857,
-    886
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
