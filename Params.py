@@ -47,12 +47,16 @@ Minimums = {
     831 : 0.005,
     939 : 0.00182
 }
-
+# 1 ATOM/OSMO
+# 678 USDC/OSMO
 Maximums = {
     1 : 0.35,
     678 : 0.13
 }
 
+# 872 USDC.axl/USDC.grv
+# 873 USDT.axl/USDT.grv
+# 938 polygon.USDC.axl/avalanche.USDC.axl/USDC.axl
 Fixed = {
     872 : 0.0000632,
     873 : 0.0000632,
