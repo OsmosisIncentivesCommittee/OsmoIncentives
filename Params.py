@@ -35,8 +35,8 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 5.
 }
 
-# 939 until the Proposal on the 3rd April
-# 831 until the Proposal on the 10th April
+# 939 USDC/USDT until the Proposal on the 3rd April
+# 831 USDT/OSMO until the Proposal on the 10th April
 Minimums = {
     9 : 0.02,
     481 : 0.005,
