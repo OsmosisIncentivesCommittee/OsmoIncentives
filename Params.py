@@ -35,7 +35,7 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 5.
 }
 
-# 939 USDC/USDT until the Proposal on the 3rd April
+# 939 USDC/USDT until the Proposal on the 10th April
 # 831 USDT/OSMO until the Proposal on the 10th April
 Minimums = {
     9 : 0.02,
@@ -87,11 +87,6 @@ match_multiple_cap = 1
 
 #Caps the matching externals in non-OSMO pools at X times the native OSMO APR
 match_multiple_cap_non_osmo = 0.5
-
-#Share of the 1, 7 and 14 day gauges
-share_1 = 0
-share_7 = 0
-share_14 = 1
 
 #How accurate is the OSMO weighting allocation
 gauge_precision = 100000000

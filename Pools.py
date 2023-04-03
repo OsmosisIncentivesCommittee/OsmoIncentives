@@ -51,7 +51,5 @@ class Pools:
         gs = {0 : int(Params.gauge_precision * Params.community_pool_share)}
         for p in self.pools.values():
             new_share = p.adjusted_share()
-            gs[p.gauge_ids["86400s"]] = int(new_share * Params.share_1 * Params.gauge_precision)
-            gs[p.gauge_ids["604800s"]] = int(new_share * Params.share_7 * Params.gauge_precision)
-            gs[p.gauge_ids["1209600s"]] = int(new_share * Params.share_14 * Params.gauge_precision)
+            gs[p.gauge_ids["1209600s"]] = int(new_share * Params.gauge_precision)
         return gs
