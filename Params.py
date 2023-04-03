@@ -47,6 +47,7 @@ Minimums = {
     831 : 0.005,
     939 : 0.00182
 }
+
 # 1 ATOM/OSMO
 # 678 USDC/OSMO
 Maximums = {
