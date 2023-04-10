@@ -60,10 +60,10 @@ def categorize(l : list[str]) -> str:
             return "OSMO_MAJOR"
         else:
             return "OSMO_MINOR"
+    # Note: This will recognise LSDs as composability pool too. Would need to revise if any (except stOSMO/OSMO) were incentivised.
     elif base[:4] == asset[:4]:
         return "COMPOSABILITY"
-    # Workaround for listing USDC/USDC/USDC with low liquidity. May cause issues if normal pools got incentivised below $5k liquidity
-    elif asset == "":
+    elif base[:4] == asset[-4:]:
         return "COMPOSABILITY"
     elif base in Params.Stables:
         return "STABLE_STABLE"

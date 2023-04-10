@@ -1,16 +1,14 @@
 incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
     497, 
-    573, 577, 584, 586,
+    553, 573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
     900, 907, 908, 938, 939
     ]
 
-#553 LIKE, end 11th April 2023
 matched_pool_ids = [
-    553
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
@@ -35,23 +33,20 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 5.
 }
 
-# 939 USDC/USDT until the Proposal on the 10th April
-# 831 USDT/OSMO until the Proposal on the 10th April
 Minimums = {
     9 : 0.02,
     481 : 0.005,
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
-    773 : 0.005,
-    831 : 0.005,
-    939 : 0.00182
+    773 : 0.005
 }
 
 # 1 ATOM/OSMO
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.35,
+    553 : 0,
     678 : 0.13
 }
 
@@ -66,6 +61,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    553
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
