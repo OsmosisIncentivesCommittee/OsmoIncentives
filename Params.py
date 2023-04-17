@@ -1,14 +1,15 @@
 incentivized_pool_ids = [
     1, 2, 3, 5, 7, 9, 15, 42,
     497, 
-    553, 573, 577, 584, 586,
+    573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
-    900, 907, 908, 938, 939
+    900, 907, 908, 938, 939, 971
     ]
 
 matched_pool_ids = [
+    960
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
@@ -46,7 +47,6 @@ Minimums = {
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.35,
-    553 : 0,
     678 : 0.13
 }
 
@@ -61,7 +61,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    553
+    960
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
