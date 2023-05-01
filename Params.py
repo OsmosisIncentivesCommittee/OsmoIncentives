@@ -10,8 +10,9 @@ incentivized_pool_ids = [
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
 # 960 WHALE, Ends with proposal of 19th May
+# 832 JKL, Ends with proposal of 31st July (3 month period)
 matched_pool_ids = [
-    960, 604
+    604, 832, 960
     ]
 
 Majors = ["ATOM", "CRO", "WETH", "WBTC", "DOT", "WBNB", "WMATIC", "WAVAX", "WFTM"]
@@ -38,7 +39,6 @@ Category_Order = {
 
 Minimums = {
     9 : 0.02,
-    481 : 0.005,
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
@@ -63,7 +63,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    960, 964
+    832, 857
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
