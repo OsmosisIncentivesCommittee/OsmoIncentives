@@ -5,7 +5,7 @@ incentivized_pool_ids = [
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
-    900, 907, 908, 938, 939, 971
+    900, 907, 908, 938, 939, 971, 1006
     ]
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
@@ -63,7 +63,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    832, 857
+    1006
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
