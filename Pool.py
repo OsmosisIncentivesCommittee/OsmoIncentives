@@ -21,6 +21,20 @@ class Pool:
         self.external_per_day = sum([g["daily_value"] for g in external_gauges.values()])
 
         self.assets = [a["symbol"] for a in pd]
+        if self.pid == 1006:
+            self.assets = ["OSMO","FIL"]
+        if self.pid == 1011:
+            self.assets = ["OSMO","ARB"]
+        if self.pid == 704:
+            self.assets = ["OSMO","ETH"]
+        if self.pid == 840:
+            self.assets = ["OSMO","BNB"]
+        if self.pid == 900:
+            self.assets = ["OSMO","FTM"]
+        if self.pid == 899:
+            self.assets = ["OSMO","AVAX"]
+        if self.pid == 789:
+            self.assets = ["OSMO","MATIC"]
         self.category = categorize(self.assets)
         
         self.cache : dict[str, Any] = {}
