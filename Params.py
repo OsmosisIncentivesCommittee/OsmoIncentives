@@ -5,15 +5,14 @@ incentivized_pool_ids = [
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
-    900, 907, 908, 938, 939, 971, 
+    900, 907, 908, 938, 939, 960, 971, 
     1006, 1011
     ]
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
-# 960 WHALE, Ends with proposal of 29th May
 # 832 JKL, Ends with proposal of 31st July (3 month period)
 matched_pool_ids = [
-    604, 832, 960
+    604, 832
     ]
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
@@ -52,7 +51,8 @@ Minimums = {
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.35,
-    678 : 0.13
+    678 : 0.13,
+    960 : 0
 }
 
 # 872 USDC.axl/USDC.grv
@@ -66,7 +66,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    731, 1006
+    960
     ]
 
 #% of Osmo Incentives allowed to be used for External Matching
