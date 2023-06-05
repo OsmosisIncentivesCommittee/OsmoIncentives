@@ -54,6 +54,10 @@ def read_csv(name : str) -> list[list[str]]:
 def categorize(l : list[str]) -> str:
     (base, asset) = based(l)
     if base == "OSMO":
+        if asset[-4:] == "OSMO":
+            return "LST"
+        if asset[:4] == "OSMO":
+            return "LST"
         if asset in Params.Stables:
             return "OSMO_STABLE"
         if asset in Params.Majors:
@@ -62,9 +66,19 @@ def categorize(l : list[str]) -> str:
             return "OSMO_MINOR"
     # Note: This will recognise LSDs as composability pool too. Would need to revise if any (except stOSMO/OSMO) were incentivised.
     elif base[:4] == asset[:4]:
-        return "COMPOSABILITY"
-    elif base[:4] == asset[-4:]:
-        return "COMPOSABILITY"
+        if base[:4] in Params.Stables:
+            return "COMPOSABILITY"   
+        if asset[:4] in Params.Stables:
+            return "COMPOSABILITY"
+        else:
+            return "LST"
+    elif base[-4:] == asset[-4:]:
+        if base[:4] in Params.Stables:
+            return "COMPOSABILITY"   
+        if asset[:4] in Params.Stables:
+            return "COMPOSABILITY"
+        else:
+            return "LST"
     elif base in Params.Stables:
         return "STABLE_STABLE"
     else:
@@ -108,5 +122,9 @@ def based(l : list[str]) -> tuple[str, str, str]:
         return ("ATOM",b)
     elif b == "ATOM":
         return ("ATOM",a)
+    elif a[-4:] == b[-4:]:
+        ordering = (a,b)
+        shorter, longer = sorted(ordering, key=len)
+        return (shorter, longer)
     print("assets not based? : ", l)
-    return ("","")
+    return (a,b)

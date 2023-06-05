@@ -4,9 +4,9 @@ incentivized_pool_ids = [
     573, 577, 584, 586,
     602, 604, 605, 608, 625, 626, 627, 641, 648, 651, 674, 678, 681,
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
-    806, 812, 831, 833, 837, 840, 857, 872, 873, 899, 
-    900, 907, 908, 938, 939, 971, 
-    1006, 1011
+    803, 806, 810, 812, 817, 831, 833, 837, 840, 857, 872, 873, 886, 899, 
+    900, 903, 907, 908, 922, 938, 939, 944, 948, 956, 971,
+    1006, 1011, 1035
     ]
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
@@ -23,9 +23,10 @@ Stables = ["USDC", "DAI", "USDT", "IST", "CMST"]
 Category_weights = {
     "OSMO_STABLE" : 0.17,
     "STABLE_STABLE" : 0.04,
-    "OSMO_MAJOR" : 0.54,
-    "OSMO_MINOR" : 0.25,
+    "OSMO_MAJOR" : 0.51,
+    "OSMO_MINOR" : 0.23,
     "COMPOSABILITY" : 0.00074,
+    "LST" : 0.05,
     "NO_CATEGORY_MATCHED" : 0
 }
 
@@ -35,7 +36,8 @@ Category_Order = {
     "OSMO_MAJOR" : 2,
     "OSMO_MINOR" : 3,
     "COMPOSABILITY" : 4,
-    "NO_CATEGORY_MATCHED" : 5.
+    "LST" : 5,
+    "NO_CATEGORY_MATCHED" : 6.
 }
 
 # 1011 ARB/OSMO, Ends with Proposal of 12th June
@@ -51,7 +53,7 @@ Minimums = {
 # 1 ATOM/OSMO
 # 678 USDC/OSMO
 Maximums = {
-    1 : 0.35,
+    1 : 0.32,
     678 : 0.13
 }
 
@@ -66,8 +68,14 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    956
+    803, 944, 886, 810, 817, 948, 956
     ]
+
+collateral_incentives = 0.01
+
+CollateralShare = {
+    803 : 1
+}
 
 #% of Osmo Incentives allowed to be used for External Matching
 match_limit = 0.30
