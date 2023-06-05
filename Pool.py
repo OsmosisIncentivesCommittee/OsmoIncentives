@@ -14,6 +14,8 @@ class Pool:
         self.volume = sum([x["value"] for x in vol[-7:]])/7
         self.gauge_ids = Query.load_gauge_ids(pid)
         
+        self.collateral_share = Params.CollateralShare.get(self.pid,0)   
+        
         self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
@@ -35,6 +37,8 @@ class Pool:
             self.assets = ["OSMO","AVAX"]
         if self.pid == 789:
             self.assets = ["OSMO","MATIC"]
+        if self.pid == 1035:
+            self.assets = ["UMEE","stUMEE"]
         self.category = categorize(self.assets)
         
         self.cache : dict[str, Any] = {}
@@ -68,6 +72,11 @@ class Pool:
             #Incentivized
             else:
                 return self.capped_fees()
+        elif "LST" in self.category:
+            if self.external_per_day/Query.OSMOPrice > 50:
+                return min(self.external_per_day,self.capped_fees())
+            else:
+                return 0
         else:
             #Matched but not incentivized
             if self.pid in Params.matched_pool_ids and self.pid not in Params.incentivized_pool_ids:
@@ -100,6 +109,11 @@ class Pool:
                 return min(Params.Maximums.get(self.pid,0) * Params.total_incentive_share,max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion)))
             else:
                 return max(Params.Minimums.get(self.pid,0) * Params.total_incentive_share, self.adjusted_revenue()/(Query.OSMOPrice * Query.daily_osmo_issuance * Query.lp_mint_proportion))
+        elif "LST" in self.category:
+            if self.pid in Params.Maximums:
+                return min(Params.Maximums.get(self.pid,0),max(Params.Minimums.get(self.pid,0), (Params.Category_weights[self.category] - Params.collateral_incentives) * self.match_capped_share() + Params.collateral_incentives * self.collateral_share) * Params.total_incentive_share)
+            else:
+                return max(Params.Minimums.get(self.pid,0), (Params.Category_weights[self.category] - Params.collateral_incentives) * self.match_capped_share() + Params.collateral_incentives * self.collateral_share) * Params.total_incentive_share
         elif "COMPOSABILITY" in self.category:
             return Params.Fixed.get(self.pid,0)
         elif self.pid in Params.Maximums:

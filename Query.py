@@ -37,13 +37,13 @@ def load_total_lp_spend() -> float:
 def load_external_gauges(pid : int) -> dict[str, Any]:
     tokens = load_tokens()
     symbols = load_symbols()
-    gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges?pagination.limit=25000")["data"]
+    gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges?pagination.limit=50000")["data"]
 
     is_external : Callable[[dict[str, Any]],bool] = lambda g: all([
         g["distribute_to"]["denom"] == "gamm/pool/"+str(pid), # paid to this pool
         not g["is_perpetual"],                                # not perpetual (so this math works)
-        int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]) + 7,   # won't end in the next week
-        parse_start_time(g["start_time"]) < days_from_now(7),  # started or starts in next week
+        int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]),   # won't end in the next day, reduced due to teams using shorter more frequent incentives
+        parse_start_time(g["start_time"]) < days_from_now(6),  # started or starts in next week
         len(g["coins"]) == 1
     ])
 
