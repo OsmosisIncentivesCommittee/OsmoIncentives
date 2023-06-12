@@ -11,8 +11,9 @@ incentivized_pool_ids = [
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
 # 832 JKL, Ends with proposal of 31st July (3 month period)
+# 960 WHALE, Ends with proposal of 31st July
 matched_pool_ids = [
-    604, 832
+    604, 832, 960
     ]
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
@@ -39,14 +40,12 @@ Category_Order = {
     "NO_CATEGORY_MATCHED" : 6.
 }
 
-# 1011 ARB/OSMO, Ends with Proposal of 12th June
 Minimums = {
     9 : 0.02,
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
-    773 : 0.005,
-    1011 : 0.005
+    773 : 0.005
 }
 
 # 1 ATOM/OSMO
@@ -67,7 +66,6 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    803, 944, 886, 810, 817, 948, 956
     ]
 
 collateral_incentives = 0.01

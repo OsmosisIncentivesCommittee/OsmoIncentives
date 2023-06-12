@@ -12,6 +12,7 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
     fee_apr = 365 * pool.fees_collected / pool.liquidity
     external_apr = 365 * pool.external_per_day / pool.liquidity
     based_assets = based(pool.assets)
+    imbalanceskew = 1 - Params.Category_weights["STABLE_STABLE"] + pools.total_variable_use("STABLE_STABLE")
     cur_total = osmo_apr + fee_apr + external_apr
     new_total = new_osmo_apr + fee_apr + external_apr
     return list(map(str, [
@@ -21,22 +22,19 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         based_assets[1],
         pool.liquidity,
         pool.fees_collected,
-        pool.capped_fees(),
-        pool.fee_share(),
-        pool.external_per_day,
-        pool.adjusted_revenue(),
-        pool.adjusted_revenue_share(),
-        pool.match_capped_share(),
         fee_apr,
-        cur_share,
-        osmo_apr,
+        pool.external_per_day,
         external_apr,
-        pool.pid in Params.matched_pool_ids,
-        pool.target_share(),
-        pool.imbalance(),
+        pool.ismatched,
+        cur_share/(1-Params.community_pool_share),
+        osmo_apr,
+        pool.target_share()/(1-Params.community_pool_share),
+        pool.imbalance()/imbalanceskew,
         pool.maturity,
-        pool.adjusted_share(),
+        pool.adjusted_share()/(1-Params.community_pool_share),
         new_osmo_apr,
+        pool.adjusted_share() * Query.daily_osmo_issuance * Query.lp_mint_proportion * (1-Params.community_pool_share),
+        pool.adjusted_share() * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
         cur_total,
         new_total,
         (new_total / cur_total) - 1
@@ -49,26 +47,23 @@ def get_headers(pools: Pools) -> list[str]:
         "Base Asset",
         "Pair Asset",
         "Liquidity",
-        "Fees Collected",
-        "Capped Fees",
-        "Fee share",
+        "Spread Collected",
+        "Swap APR",
         "External $ Per Day",
-        "Adjusted Revenue",
-        "Adjusted Revenue Share",
-        "Match Capped Share",
-        "Fee APR",
-        "Current Share",
-        "Current Osmo APR",
         "External APR",
         "Is Matched",
+        "Current Share",
+        "Current Osmo APR",
         "Target Share",
         "Imbalance",
         "Maturity",
         "Adjusted Share",
         "New Osmo APR",
+        "OSMO Daily Spend",
+        "Dollar Equivalent Daily Spend",
         "Current Total APR",
         "New Total APR",
-        "Effective APR Change",
+        "Effective APR Change"
     ]))
 
 def get_totals(pools: Pools) -> list[str]:
@@ -79,13 +74,8 @@ def get_totals(pools: Pools) -> list[str]:
         "",
         pools.total_liquidity(""),
         pools.total_fees(""),
-        pools.total_capped_fees(""),
-        "",
-        sum([p.external_per_day for p in pools.pools.values()]),
-        pools.total_adjusted_revenue_for(""),
-        "",
-        "",
         pools.avg_fee_apr(""),
+        sum([p.external_per_day for p in pools.pools.values()]),
         "",
         "",
         "",
@@ -95,9 +85,11 @@ def get_totals(pools: Pools) -> list[str]:
         "",
         "",
         "",
+        Query.daily_osmo_issuance * Query.lp_mint_proportion * (1-Params.community_pool_share),
+        Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
         "",
         "",
-        "",
+        ""
     ]))
 
 def update() -> None:

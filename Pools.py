@@ -53,3 +53,7 @@ class Pools:
             new_share = p.adjusted_share()
             gs[p.gauge_ids["1209600s"]] = int(new_share * Params.gauge_precision)
         return gs
+
+    def total_variable_use(self, category : str) -> float:
+        pools = [p for p in self.pools.values() if p.category == category]
+        return sum([p.adjusted_share() for p in pools])

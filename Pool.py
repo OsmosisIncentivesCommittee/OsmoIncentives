@@ -13,7 +13,7 @@ class Pool:
         self.liquidity = int(pd[0]["liquidity"])
         self.volume = sum([x["value"] for x in vol[-7:]])/7
         self.gauge_ids = Query.load_gauge_ids(pid)
-        
+
         self.collateral_share = Params.CollateralShare.get(self.pid,0)   
         
         self.swap_fee = parse_percent(pd[0]["fees"])
@@ -41,13 +41,19 @@ class Pool:
             self.assets = ["UMEE","stUMEE"]
         self.category = categorize(self.assets)
         
+        if self.pid in Params.matched_pool_ids:
+            self.ismatched = True
+        elif "LST" in self.category:
+            if self.external_per_day/Query.OSMOPrice > 50:
+                self.ismatched = True
+            else:
+                self.ismatched = False
+        else:
+            self.ismatched = False
+
         self.cache : dict[str, Any] = {}
 
-        #StableSwap Incentives are not affected by Maturity, otherwise maturity is weeks since listing on info site
-        if "STABLE_STABLE" in self.category:
-            self.maturity = 0
-        else:
-            self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
+        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
@@ -150,8 +156,10 @@ class Pool:
     # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self) -> float:
         if self.pid in Params.MaturityExceptions:
+            self.maturity = 0
             return self.target_share()
         elif "STABLE_STABLE" in self.category:
+            self.maturity = 0
             return self.target_share()
         else:
             scale_limit_factor = min(1, self.maturity / Params.entry_window)
