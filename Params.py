@@ -59,13 +59,14 @@ Maximums = {
 # 873 USDT.axl/USDT.grv
 # 938 polygon.USDC.axl/avalanche.USDC.axl/USDC.axl
 Fixed = {
-    872 : 0.0000632,
-    873 : 0.0000632,
-    938 : 0.0000948
+    872 : 0.000211,
+    873 : 0.000211,
+    938 : 0.000316
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
+    857, 1006, 886, 817, 810, 956, 903
     ]
 
 collateral_incentives = 0.01
@@ -99,7 +100,7 @@ match_multiple_cap_non_osmo = 0.5
 gauge_precision = 100000000
 
 #% of LP emissions redirected to community pool
-community_pool_share = 0.70
+community_pool_share = 0
 
 #Remaining share to split between incentivised pools
 total_incentive_share = 1 - community_pool_share
