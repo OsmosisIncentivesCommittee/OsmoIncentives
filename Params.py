@@ -6,7 +6,7 @@ incentivized_pool_ids = [
     704, 712, 722, 725, 730, 731, 773, 789, 795, 
     803, 806, 810, 812, 817, 831, 833, 837, 840, 857, 872, 873, 886, 899, 
     900, 903, 907, 908, 922, 938, 939, 944, 948, 956, 971,
-    1006, 1011, 1035
+    1006, 1011, 1013, 1035
     ]
 
 # 604 STARS, Ends with proposal of 24th July (Loaded 4 weeks late in error, preapprove 4 week further matching)
@@ -45,13 +45,15 @@ Minimums = {
     674 : 0.035,
     704 : 0.10,
     712 : 0.085,
-    773 : 0.005
+    773 : 0.005,
+    1013: 0.002724
 }
 
 # 1 ATOM/OSMO
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.32,
+    2 : 0.002724,
     678 : 0.13
 }
 
@@ -66,7 +68,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    857, 1006, 886, 817, 810, 956, 903
+    2, 857, 1006, 1013
     ]
 
 collateral_incentives = 0.01

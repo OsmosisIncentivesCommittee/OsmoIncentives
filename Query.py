@@ -5,9 +5,9 @@ from typing import Any, Callable
 IMPERATOR = "https://api-osmosis.imperator.co/"
 BLOCKAPSIS = "https://lcd-osmosis.blockapsis.com/osmosis/"
 
-daily_osmo_issuance = (float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000)*0.333333333333333333
+daily_osmo_issuance = (float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000)
 OSMOPrice = float(load_json(IMPERATOR+"tokens/v2/osmo")[0]["price"])
-lp_mint_proportion = 0.2
+lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
 
 def load_pool(pid : int):
     return load_json(IMPERATOR+"pools/v2/"+str(pid))
