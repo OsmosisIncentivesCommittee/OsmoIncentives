@@ -49,16 +49,17 @@ Minimums = {
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.32,
+    2 : 0,
     678 : 0.13,
-    608 : 0.000343,
-    577 : 0.000475,
-    602 : 0.00053,
-    900 :  0.0007675,
-    648 : 0.000444,
-    651 : 0.0000966,
-    42 : 0.0002336,
-    626 : 0.0002875,
-    731 : 0.000164
+    608 : 0,
+    577 : 0,
+    602 : 0,
+    900 :  0,
+    648 : 0,
+    651 : 0,
+    42 : 0,
+    626 : 0,
+    731 : 0
 }
 
 # 872 USDC.axl/USDC.grv
@@ -72,7 +73,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    608, 577, 602, 900, 648, 651, 42, 626, 731
+    2, 608, 577, 602, 900, 648, 651, 42, 626, 731
     ]
 
 collateral_incentives = 0.01
