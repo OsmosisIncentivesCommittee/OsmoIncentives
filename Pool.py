@@ -10,13 +10,26 @@ class Pool:
         self.pools = pools
         self.pid = pid
 
-        self.liquidity = int(pd[0]["liquidity"])
-        self.volume = sum([x["value"] for x in vol[-7:]])/7
+# Establish the original pool to fetch additional volume and liquidity from for display as this is treated as full range.
+        if self.pid in Params.migration_links:
+            self.migrationlink = Params.migration_links[pid]
+            migpd = Query.load_pool(self.migrationlink)
+            migvol = Query.load_volume(self.migrationlink)
+            self.liquidity = int(pd[0]["liquidity"]) + int(migpd[0]["liquidity"])
+            self.volume = (sum([x["value"] for x in vol[-7:]])+sum([x["value"] for x in migvol[-7:]]))/7
+        else:
+            self.liquidity = int(pd[0]["liquidity"])
+            self.volume = sum([x["value"] for x in vol[-7:]])/7
+        
         self.gauge_ids = Query.load_gauge_ids(pid)
 
         self.collateral_share = Params.CollateralShare.get(self.pid,0)   
         
-        self.swap_fee = parse_percent(pd[0]["fees"])
+        # Overwrite since Supercharged Fees not showing
+        if self.pid == 1066:
+            self.swap_fee = 0.002
+        else:
+            self.swap_fee = parse_percent(pd[0]["fees"])
         self.fees_collected = self.volume * self.swap_fee
 
         external_gauges = Query.load_external_gauges(self.pid)
@@ -53,7 +66,11 @@ class Pool:
 
         self.cache : dict[str, Any] = {}
 
-        self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
+# Overwrite Supercharged pools as being fully mature during migration
+        if self.pid == 1066:
+            self.maturity = 4
+        else:
+            self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:

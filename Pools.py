@@ -51,7 +51,11 @@ class Pools:
         gs = {0 : int(Params.gauge_precision * Params.community_pool_share)}
         for p in self.pools.values():
             new_share = p.adjusted_share()
-            gs[p.gauge_ids["1209600s"]] = int(new_share * Params.gauge_precision)
+            try:
+                gs[p.gauge_ids["1209600s"]] = int(new_share * Params.gauge_precision)
+            # Supercharged pools display as a 24 hour bonded pool to fit into this system. They only have this one gauge while Classic pools have 3 so this can be used as an identifier.
+            except:
+                gs[p.gauge_ids["86400s"]] = int(new_share * Params.gauge_precision)
         return gs
 
     def total_variable_use(self, category : str) -> float:
