@@ -4,8 +4,8 @@ incentivized_pool_ids = [
     573, 584, 586,
     604, 605, 625, 627, 641, 678, 681,
     704, 712, 722, 725, 730, 773, 789, 795, 
-    803, 806, 810, 812, 817, 831, 833, 837, 840, 857, 872, 873, 886, 899, 
-    903, 907, 908, 922, 938, 939, 944, 948, 956, 971,
+    803, 806, 810, 812, 817, 831, 832, 833, 837, 840, 857, 872, 873, 886, 899, 
+    903, 907, 908, 922, 938, 939, 944, 948, 956, 960, 971,
     1006, 1011, 1013, 1035, 1039, 1066
     ]
 
@@ -14,7 +14,7 @@ incentivized_pool_ids = [
 # 1036 LORE, Matched until Supercharged Pool available
 # 1057 PICA, Matched until proposal of 1st July 2024
 matched_pool_ids = [
-    832, 960, 1036, 1057
+    1036, 1057
     ]
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
@@ -50,7 +50,9 @@ Minimums = {
 # 678 USDC/OSMO
 Maximums = {
     1 : 0.32,
-    678 : 0.13
+    678 : 0.13,
+    832 : 0,
+    960 : 0
 }
 
 # 872 USDC.axl/USDC.grv
@@ -64,7 +66,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    1036
+    832, 960
     ]
 
 # Migration links established by governance. Manually setting for now.
