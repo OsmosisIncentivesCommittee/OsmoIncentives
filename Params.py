@@ -4,17 +4,18 @@ incentivized_pool_ids = [
     573, 584, 586,
     604, 605, 625, 627, 641, 678, 681,
     704, 712, 722, 725, 730, 773, 789, 795, 
-    803, 806, 810, 812, 817, 831, 832, 833, 837, 840, 857, 872, 873, 886, 899, 
-    903, 907, 908, 922, 938, 939, 944, 948, 956, 960, 971,
-    1006, 1011, 1013, 1035, 1039, 1066
+    803, 806, 810, 812, 817, 831, 833, 837, 840, 857, 872, 873, 886, 899, 
+    903, 907, 908, 922, 938, 939, 944, 948, 956, 971,
+    1011, 1013, 1035, 1039, 1066
     ]
+# 1006, FIL, Temporarily Removed from automatic incentives as there has been 0 volume. Incentives will remain the same for the time being due to this.
 
-# 832 JKL, Ends with proposal of 31st July (3 month period)
-# 960 WHALE, Ends with proposal of 31st July
 # 1036 LORE, Matched until Supercharged Pool available
 # 1057 PICA, Matched until proposal of 1st July 2024
+# 1060 QSR, Matched until proposal of 23rd October 2023
+# 882 NOM,  Matched until proposal of 6th November 2023
 matched_pool_ids = [
-    1036, 1057
+    882, 1036, 1057, 1060
     ]
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
@@ -66,7 +67,7 @@ Fixed = {
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
 MaturityExceptions = [
-    832, 960
+    882, 1060
     ]
 
 # Migration links established by governance. Manually setting for now.

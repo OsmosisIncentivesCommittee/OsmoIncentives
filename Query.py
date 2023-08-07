@@ -3,11 +3,11 @@ import Params
 from typing import Any, Callable
 
 IMPERATOR = "https://api-osmosis.imperator.co/"
-BLOCKAPSIS = "https://lcd-osmosis.blockapsis.com/osmosis/"
+LCD = "http://146.190.0.132:1317/osmosis/"
 
-daily_osmo_issuance = (float(load_json(BLOCKAPSIS+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000)
+daily_osmo_issuance = (float(load_json(LCD+"mint/v1beta1/epoch_provisions")["epoch_provisions"])/1000000)
 OSMOPrice = float(load_json(IMPERATOR+"tokens/v2/osmo")[0]["price"])
-lp_mint_proportion = float(load_json(BLOCKAPSIS+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
+lp_mint_proportion = float(load_json(LCD+"mint/v1beta1/params")["params"]["distribution_proportions"]["pool_incentives"])
 
 def load_pool(pid : int):
     return load_json(IMPERATOR+"pools/v2/"+str(pid))
@@ -16,11 +16,11 @@ def load_volume(pid : int):
     return load_json(IMPERATOR+"pools/v2/volume/"+str(pid)+"/chart")
 
 def load_gauge_ids(pid : int) -> dict[str, int]:
-    gs = load_json(BLOCKAPSIS+"pool-incentives/v1beta1/gauge-ids/"+str(pid))["gauge_ids_with_duration"]
+    gs = load_json(LCD+"pool-incentives/v1beta1/gauge-ids/"+str(pid))["gauge_ids_with_duration"]
     return {g["duration"]:int(g["gauge_id"]) for g in gs}
 
 def load_distr_info():
-    return load_json(BLOCKAPSIS+"pool-incentives/v1beta1/distr_info")["distr_info"]
+    return load_json(LCD+"pool-incentives/v1beta1/distr_info")["distr_info"]
 
 def load_tokens():
     token_data = load_json(IMPERATOR+"tokens/v2/all")
@@ -37,13 +37,13 @@ def load_total_lp_spend() -> float:
 def load_external_gauges(pid : int) -> dict[str, Any]:
     tokens = load_tokens()
     symbols = load_symbols()
-    gauges_data = load_json(BLOCKAPSIS+"incentives/v1beta1/gauges?pagination.limit=50000")["data"]
+    gauges_data = load_json(LCD+"incentives/v1beta1/gauges?pagination.limit=50000")["data"]
 
     is_external : Callable[[dict[str, Any]],bool] = lambda g: all([
         g["distribute_to"]["denom"] == "gamm/pool/"+str(pid), # paid to this pool
         not g["is_perpetual"],                                # not perpetual (so this math works)
         int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]),   # won't end in the next day, reduced due to teams using shorter more frequent incentives
-        parse_start_time(g["start_time"]) < days_from_now(6),  # started or starts in next week
+        parse_start_time(g["start_time"]) < days_from_now(8),  # started or starts in next week
         len(g["coins"]) == 1
     ])
 
@@ -52,6 +52,24 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
     for g in gauges_data:
         if is_external(g):
             denom = g["coins"][0]["denom"]
+            ## Overwrite for NOM matching as not on Price API
+            if denom == "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163":
+                symbol = "NOM"
+                exponent = 18
+                amount = int(g["coins"][0]["amount"])/pow(10, exponent)
+                price = 0.1565
+                epochs = int(g["num_epochs_paid_over"])
+                filled_epochs = int(g["filled_epochs"])
+
+                external_gauges[g["id"]] = {
+                    "symbol" : symbol,
+                    "amount" : amount,
+                    "start_time" : g["start_time"],
+                    "epochs": epochs,
+                    "filled_epochs" : filled_epochs,
+                    "epochs_remaining" : epochs - filled_epochs,
+                    "daily_value" : amount * price / epochs
+                }
             symbol = symbols.get(denom,None)
             if symbol == None:
                 continue

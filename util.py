@@ -6,7 +6,6 @@ import Params
 import time
 
 def load_json_(url : str) -> Any:
-    time.sleep(1)
     return json.loads(urllib.request.urlopen(urllib.request.Request(url)).read().decode('utf-8'))
 
 
@@ -23,11 +22,12 @@ def load_json(url : str) -> Any:
     r = query_cache.get(url)
     while r == None:
         try:
+            time.sleep(1)
             print("loading url: ", url)
             r = load_json_(url)
             query_cache[url] = r
-        except:
-            print("retrying: ", url)
+        except Exception as e:
+            print("retrying: ", url, e)
             pass
     return r
 
