@@ -42,6 +42,8 @@ class Pool:
             self.assets = ["OSMO","ARB"]
         if self.pid == 704:
             self.assets = ["OSMO","ETH"]
+        if self.pid == 831:
+            self.assets = ["OSMO","USDT.axl"]   
         if self.pid == 840:
             self.assets = ["OSMO","BNB"]
         if self.pid == 900:
@@ -50,8 +52,22 @@ class Pool:
             self.assets = ["OSMO","AVAX"]
         if self.pid == 789:
             self.assets = ["OSMO","MATIC"]
+        if self.pid == 939:
+            self.assets = ["USDC","USDT.axl"]
         if self.pid == 1035:
             self.assets = ["UMEE","stUMEE"]
+        if self.pid == 1076:
+            self.assets = ["USDT","OSMO"]
+        if self.pid == 1077:
+            self.assets = ["USDT","OSMO"]        
+        if self.pid == 1078:
+            self.assets = ["USDT","ATOM"]
+        if self.pid == 1079:
+            self.assets = ["USDT","ATOM"]
+        if self.pid == 1080:
+            self.assets = ["USDT","USDC"]
+        if self.pid == 1081:
+            self.assets = ["USDT","USDC"]
         self.category = categorize(self.assets)
         
         if self.pid in Params.matched_pool_ids:

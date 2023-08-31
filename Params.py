@@ -6,7 +6,10 @@ incentivized_pool_ids = [
     704, 712, 722, 725, 730, 773, 789, 795, 
     803, 806, 810, 812, 817, 831, 833, 837, 840, 857, 872, 873, 886, 899, 
     903, 907, 908, 922, 938, 939, 944, 948, 956, 971,
-    1011, 1013, 1035, 1039, 1066
+    1011, 1013, 1035, 1039, 1066, 
+    1076, 1077, 
+    # 1078, 1079,
+    1080, 1081 
     ]
 # 1006, FIL, Temporarily Removed from automatic incentives as there has been 0 volume. Incentives will remain the same for the time being due to this.
 
@@ -20,7 +23,7 @@ matched_pool_ids = [
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
 
-Stables = ["USDC", "DAI", "USDT", "IST", "CMST"]
+Stables = ["USDC", "DAI", "USDT", "IST", "CMST","USDT.axl"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
