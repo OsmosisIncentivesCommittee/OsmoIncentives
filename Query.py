@@ -40,7 +40,7 @@ def load_external_gauges(pid : int) -> dict[str, Any]:
     gauges_data = load_json(LCD+"incentives/v1beta1/gauges?pagination.limit=50000")["data"]
 
     is_external : Callable[[dict[str, Any]],bool] = lambda g: all([
-        g["distribute_to"]["denom"] == "gamm/pool/"+str(pid), # paid to this pool
+        g["distribute_to"]["denom"] == "gamm/pool/"+str(pid) or g["distribute_to"]["denom"] == "no-lock/e/"+str(pid), # paid to this pool
         not g["is_perpetual"],                                # not perpetual (so this math works)
         int(g["num_epochs_paid_over"]) > int(g["filled_epochs"]),   # won't end in the next day, reduced due to teams using shorter more frequent incentives
         parse_start_time(g["start_time"]) < days_from_now(8),  # started or starts in next week
