@@ -83,10 +83,7 @@ class Pool:
         self.cache : dict[str, Any] = {}
 
 # Overwrite Supercharged pools as being fully mature during migration
-        if self.pid == 1066:
-            self.maturity = 4
-        else:
-            self.maturity = self.pools.get_current_share(self.gauge_ids) != 0 and min(4, int(len(vol)/7)) or 0
+        self.maturity = 4
 
     #cap swap fees collected at a multiple of avg per unit tvl to disincentivize wash trading
     def capped_fees(self) -> int:
@@ -189,9 +186,6 @@ class Pool:
     # ie linearly shift from entirely the target, to entirely the scale limited target over 4 weeks
     def unnorm_adjusted_share_(self) -> float:
         if self.pid in Params.MaturityExceptions:
-            self.maturity = 0
-            return self.target_share()
-        elif "STABLE_STABLE" in self.category:
             self.maturity = 0
             return self.target_share()
         else:
