@@ -110,7 +110,7 @@ CollateralShare = {
 match_limit = 0.30
 
 #% that the amount of OSMO incentives a pool receives may change by per week
-adjust_scale = 0.25
+adjust_scale = 0.025
 
 #Weeks since token listing that a token may change incentives more than the adjust_scale cap
 entry_window = 4
