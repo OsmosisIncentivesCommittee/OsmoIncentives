@@ -27,6 +27,7 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         pool.ismatched,
         cur_share,
         osmo_apr,
+        cur_share * Query.daily_osmo_issuance * Query.lp_mint_proportion,
         cur_share * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice,
         cur_total
     ]))
@@ -44,6 +45,7 @@ def get_headers(pools: Pools) -> list[str]:
         "Is Matched",
         "Current Share",
         "Current Osmo APR",
+        "Daily OSMO Spend",
         "Dollar Equivalent Daily Spend",
         "Current Total APR"
     ]))
@@ -61,6 +63,7 @@ def get_totals(pools: Pools) -> list[str]:
         "",
         "",
         "",
+        Query.daily_osmo_issuance * Query.lp_mint_proportion,
         Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice,
         ""
     ]))
