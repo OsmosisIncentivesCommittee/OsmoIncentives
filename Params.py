@@ -18,7 +18,7 @@ matched_pool_ids = [
     882, 1036, 1057, 1060
     ]
 
-Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK"]
+Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK", "SOL"]
 
 Stables = ["USDC", "DAI", "USDT", "IST", "CMST","USDT.axl"]
 
@@ -128,10 +128,10 @@ match_multiple_cap = 1
 match_multiple_cap_non_osmo = 0.5
 
 #How accurate is the OSMO weighting allocation
-gauge_precision = 100000000
+gauge_precision = 36530
 
 #% of LP emissions redirected to community pool
-community_pool_share = 0
+community_pool_share = 1384
 
 #Remaining share to split between incentivised pools
 total_incentive_share = 1 - community_pool_share
