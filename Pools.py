@@ -48,7 +48,7 @@ class Pools:
         )
 
     def new_gauges(self) -> dict[int, int]:
-        gs = {0 : int(Params.gauge_precision * Params.community_pool_share)}
+        gs = {0 : int(Params.community_pool_share)}
         for p in self.pools.values():
             new_share = p.adjusted_share()
             try:

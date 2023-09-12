@@ -25,9 +25,9 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         pool.external_per_day,
         external_apr,
         pool.ismatched,
-        cur_share/(1-Params.community_pool_share),
+        cur_share,
         osmo_apr,
-        cur_share * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
+        cur_share * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice,
         cur_total
     ]))
 
@@ -61,7 +61,7 @@ def get_totals(pools: Pools) -> list[str]:
         "",
         "",
         "",
-        Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
+        Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice,
         ""
     ]))
 

@@ -134,4 +134,4 @@ gauge_precision = 36530
 community_pool_share = 1384
 
 #Remaining share to split between incentivised pools
-total_incentive_share = 1 - community_pool_share
+total_incentive_share = 1 - (community_pool_share/gauge_precision)
