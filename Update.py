@@ -27,7 +27,7 @@ def get_columns(pools : Pools, pool : Pool) -> list[str]:
         pool.ismatched,
         cur_share/(1-Params.community_pool_share),
         osmo_apr,
-        pool.current_share() * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
+        cur_share * Query.daily_osmo_issuance * Query.lp_mint_proportion * Query.OSMOPrice * (1-Params.community_pool_share),
         cur_total
     ]))
 
