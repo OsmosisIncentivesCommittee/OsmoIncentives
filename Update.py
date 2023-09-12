@@ -96,7 +96,7 @@ def update() -> None:
     pools = Pools()
     lines = [",".join(get_headers(pools))] + [",".join(get_totals(pools))] + [
         ",".join(get_columns(pools, p))
-        for p in sorted(sorted(pools.pools.values(), reverse=True, key=lambda x: x.liquidity), key=lambda x: Params.Category_Order[x.category])]
+        for p in sorted(pools.pools.values(), reverse=True, key=lambda x: x.liquidity)]
 
     write_csv("data/incentives.csv", lines)
 
