@@ -64,7 +64,7 @@ class Pool:
             self.assets = ["USDT","USDC"]
         if self.pid == 1081:
             self.assets = ["USDT","USDC"]
-        if self.pid == 1081:
+        if self.pid == 1091:
             self.assets = ["OSMO","DOT.axl"]
         if self.pid == 1123:
             self.assets = ["USDT","SOL"]
