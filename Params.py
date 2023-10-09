@@ -1,24 +1,13 @@
 incentivized_pool_ids = [
-    681,
-    722, 725, 789, 
-    810, 817, 833, 840, 872, 873, 886, 899, 
-    903, 908, 922, 938, 944, 948, 956,
-    1011, 1035, 1066, 1076, 1077, 1078, 1079, 1080, 1081, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099,
-    1100, 1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1123, 1124, 1125, 1126, 1127, 1128, 1133, 1134, 1135, 1136
+    833, 1066, 1076, 1077, 1078, 1079, 1090, 1107, 1133, 1134, 1135, 1136
     ]
-# 1006, FIL, Temporarily Removed from automatic incentives as there has been 0 volume. Incentives will remain the same for the time being due to this.
 
-# 1036 LORE, Matched until Supercharged Pool available
-# 1057 PICA, Matched until proposal of 1st July 2024
-# 1060 QSR, Matched until proposal of 23rd October 2023
-# 882 NOM,  Matched until proposal of 6th November 2023
 matched_pool_ids = [
-    882, 1036, 1057, 1060
     ]
 
 Majors = ["ATOM", "CRO", "ETH", "WBTC", "DOT", "BNB", "MATIC", "AVAX", "FTM", "FIL", "ARB", "LINK", "SOL"]
 
-Stables = ["USDC", "DAI", "USDT", "IST", "CMST","USDT.axl"]
+Stables = ["USDC", "DAI", "USDT", "IST", "CMST"]
 
 Category_weights = {
     "OSMO_STABLE" : 0.17,
@@ -41,24 +30,13 @@ Category_Order = {
 }
 
 Minimums = {
-    704 : 0.10,
-    1090 : 0.085
 }
 
-# 1 ATOM/OSMO
-# 678 USDC/OSMO
 Maximums = {
-    1 : 0.32,
-    678 : 0.13
+    833 : 0 
 }
 
-# 872 USDC.axl/USDC.grv
-# 873 USDT.axl/USDT.grv
-# 938 polygon.USDC.axl/avalanche.USDC.axl/USDC.axl
 Fixed = {
-    872 : 0.000211,
-    873 : 0.000211,
-    938 : 0.000316
 }
 
 #Causes Maturity to be overruled, use for 1 proposal when changing minimums or matching incentives to ensure they are met
@@ -129,7 +107,7 @@ match_multiple_cap_non_osmo = 0.5
 gauge_precision = 36530
 
 #% of LP emissions redirected to community pool
-community_pool_share = 1384
+community_pool_share = 11278
 
 #Remaining share to split between incentivised pools
 total_incentive_share = 1 - (community_pool_share/gauge_precision)
